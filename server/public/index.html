@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pop Quiz!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/landing-page.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+</head>
+
+<body>
+
+    <!-- Header -->
+    <a name="about"></a>
+    <div class="intro-header">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-message">
+                        <h1>Basic IT Pop Quiz!</h1>
+                        <h3>Test your knowledge easy and fast.</h3>
+                        <h3>Just take 2 minutes to see if you are in the future!</h3>
+                        <hr class="intro-divider">
+                    </div>
+                 
+                    <form id ="userInput" name="userInput" onsubmit="return submitLogin()" method="post" action="quiz">
+                        <div class="group">
+                            <input type="text" name="username"><span class="highlight"></span><span class="bar"></span>
+                            <label>Name & Surname</label>
+                        </div>
+                        <div class="group">
+                            <input type="email" name="emailAdd"><span class="highlight"></span><span class="bar"></span>
+                            <label>E - Mail Address</label>
+                        </div>
+                        <button type="submit" class="button buttonBlue" id="inputSubmitBtn">Start Test
+                            <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+                        </button>
+                     </form>
+
+                    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+                    <script src="js/index.js"></script>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="list-inline">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li class="footer-menu-divider">&sdot;</li>
+                        <li>
+                            <a href="#about">About</a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted small">Copyright &copy; 2016. All Rights Reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/submitValidation.js"></script>
+
+</body>
+
+</html>
