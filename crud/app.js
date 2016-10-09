@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 var db = mysql.createConnection({ 
 	host: 'localhost',
 	user: 'root',
-	port: '3400',
 	password: '12345',
 	database: 'quiz'
 });
@@ -28,8 +27,9 @@ var db = mysql.createConnection({
 
 db.connect(function(err) {
 	if(err){
-		throw err;
 		console.log('Database connection failed');
+		throw err;
+		
 	} else {
 		console.log('Database connection succesful');
 	}
@@ -70,7 +70,17 @@ db.query(listItems, function(err, results) {
 
 //Insert Form Data into Database ====
 
-app.post('/submitted', function(req, res) {
+app.get('/listpersons', function(req, res) {
+	res.send([
+		{
+		firstname: "Tansu"
+	}, 
+	{
+		firstname: "Utku"
+	}]);
+});
+
+app.post('/saveperson', function(req, res) {
 	var first = req.body.first_name;
 	var last = req.body.last_name;
 	var email = req.body.email;
@@ -80,7 +90,7 @@ app.post('/submitted', function(req, res) {
 	if((first != null || first != "") && (last != null || last != "") && (email != null || email != "") && (comment != null || comment != "")) {
 		db.query(insertItem, [first, last, email, comment, timeDate], function(err) {
 			if(err) {
-				throw err;
+			    res.sendStatus(500);
 				console.log('Database write error');
 			} else {
 				console.log('Database save succesful');

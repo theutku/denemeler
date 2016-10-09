@@ -7,6 +7,8 @@
     
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    
     <script src="js/submit.js"></script>
 
   </head>
@@ -19,7 +21,7 @@
         <h3>Fill out the form below to leave a feedback and let us improve!</h3>
       </div>
       <div class="row body">
-        <form name="comment" onsubmit="return formCheck()" action="submitted" method="post">
+        <form name="comment" onsubmit="return submitform()"  method="post">
           <ul>
             
             <li>
@@ -52,6 +54,7 @@
             
           </ul>
         </form>  
+        <button onclick="getData()">Datayı al</button>
       </div>
     </div>
     
