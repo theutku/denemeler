@@ -54,11 +54,9 @@ function getData(){
 }
 */
 
-if(lcoation.href = "submitted.html") {
-	function listAll() {
-		$.get("/listpersons"
-		).done(function() {
-			var 
-		})
-	};
+function listAll() {
+	$.get("/listpersons"
+	).done(function() {
+		alert('Done');
+	})
 };
