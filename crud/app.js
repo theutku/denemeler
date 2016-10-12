@@ -70,14 +70,21 @@ db.query(listItems, function(err, results) {
 
 //Insert Form Data into Database ====
 
-app.get('/listpersons', function(req, res) {
-	res.send([
-		{
-		firstname: "Tansu"
-	}, 
-	{
-		firstname: "Utku"
-	}]);
+app.get('/submitted.html', function(req, res) {
+	db.query(listItems, function(err, results) {
+		if(err) {
+			console.log('Error performing database listing.');
+		} else if(!results.length) {
+			var display = req.body.firstItem;
+			display = "No records"
+			console.log('No records.');
+		} else {
+			var records = "";
+			for(i=0; i<rows.length; i++) {
+				records += rows[i];
+			}
+		}
+	})
 });
 
 app.post('/saveperson', function(req, res) {
@@ -97,5 +104,4 @@ app.post('/saveperson', function(req, res) {
 			}
 		});
 	}
-	res.sendFile(__dirname + '/public/submitted.html');
 });

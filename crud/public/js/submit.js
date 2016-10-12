@@ -38,17 +38,27 @@ function submitform() {
 
 		}).done(function () {
 			location.href = "/submitted.html";
-		})
-		.fail(function () {
-			alert("error");
+		}).fail(function () {
+			alert("Error saving person");
 		});
 
 	return false;
 };
 
+/*
 function getData(){
 
 	$.get("/listpersons", function(data) {
 		console.log(data);
 	});
 }
+*/
+
+if(lcoation.href = "submitted.html") {
+	function listAll() {
+		$.get("/listpersons"
+		).done(function() {
+			var 
+		})
+	};
+};
