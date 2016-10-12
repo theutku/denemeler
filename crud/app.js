@@ -40,8 +40,8 @@ db.connect(function(err) {
 
 app.listen(3946, function(err) {
 	if(err) {
-		throw err;
 		console.log('Localhost connection error');
+		throw err;
 	} else {
 		console.log('Localhost connection succesful at ' + this.address().port);
 	}
@@ -59,8 +59,8 @@ var updateItem = 'UPDATE crudtable SET '
 
 db.query(listItems, function(err, results) {
 	if(err) {
-		throw err;
 		console.log('Database search error');
+		throw err;
 	} else if (!results.length) {
 		console.log('No records were found.')
 	} else {
