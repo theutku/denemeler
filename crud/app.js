@@ -29,8 +29,7 @@ var db = mysql.createConnection({
 db.connect(function(err) {
 	if(err){
 		console.log('Database connection failed');
-		throw err;
-		
+		throw err;	
 	} else {
 		console.log('Database connection succesful');
 	}
@@ -70,26 +69,6 @@ db.query(listItems, function(err, results) {
 });
 
 
-//List Database Records to the List in the Submitted Page ======
-/*
-app.get('/submitted.html', function(req, res) {
-	db.query(listItems, function(err, results) {
-		if(err) {
-			console.log('Error performing database listing.');
-		} else if(!results.length) {
-			var display = req.body.firstItem;
-			display = "No records."
-			console.log('No records.');
-		} else {
-			var records = [];
-			for(i=0; i<rows.length; i++) {
-				records += rows[i];
-			}
-		}
-	})
-});
-*/
-
 //Insert Form Data into Database ====
 
 app.post('/saveperson', function(req, res) {
@@ -106,7 +85,30 @@ app.post('/saveperson', function(req, res) {
 				console.log('Database write error');
 			} else {
 				console.log('Database save succesful');
+				res.end();
 			}
 		});
 	}
+	
+});
+
+
+//List Database Records to the List in the Submitted Page ======
+
+app.get('/listpersons', function(req, res) {
+	db.query(listItems, function(err, rows) {
+		if(err) {
+			console.log('Error performing database listing.');
+		} else if(!rows.length) {
+			var display = req.body.firstItem;
+			display = "No records."
+			console.log('No records.');
+		} else {
+			var records = [];
+			for(var i=0; i<rows.length; i++) {
+				records.push(rows[i].firstname);
+				console.log(rows[i]);
+			}
+		}
+	})
 });

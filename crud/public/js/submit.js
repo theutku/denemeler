@@ -49,13 +49,14 @@ function submitForm() {
 
 
 //List all the Records in the Database to the Submitted Page =========
-/*
+
 function listAll() {
-	$.get("/listpersons"
+	$.get("/listpersons", records
 	).done(function() {
-		alert('Done');
+		for(var i; i<records.length; i++){
+			$('#recordList').append('<li> ' + records[i] + '</li>');
+		}
+	}).fail(function() {
+		alert('Error displaying results');
 	})
 };
-
-$(document).ready(listAll);
-*/

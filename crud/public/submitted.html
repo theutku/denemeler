@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/style.css">
-    
+
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="js/submit.js"></script>
    
   </head>
@@ -19,8 +21,11 @@
         <h3>Thank you for your Feedback!</h3>
       	<h3>Saved Records:</h3>
   	</div>
+    <div>
+      <button onclick="return listAll()">List Records</button>  
+    </div>
 
-	<ul name="recordList">
+	<ul name="recordList" id="recordList">
 		<li name="firstItem"></li>
 	</ul>
 	</div>
