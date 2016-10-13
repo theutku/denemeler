@@ -51,8 +51,8 @@ function submitForm() {
 //List all the Records in the Database to the Submitted Page =========
 
 function listAll() {
-	$.get("/listpersons", records
-	).done(function() {
+	$.get("/listpersons"
+	).done(function(records) {
 		for(var i; i<records.length; i++){
 			$('#recordList').append('<li> ' + records[i] + '</li>');
 		}

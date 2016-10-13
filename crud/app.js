@@ -18,7 +18,6 @@ app.use(bodyParser.json());
 var db = mysql.createConnection({ 
 	host: 'localhost',
 	user: 'root',
-	port: '3400',
 	password: '12345',
 	database: 'quiz'
 });
@@ -85,7 +84,7 @@ app.post('/saveperson', function(req, res) {
 				console.log('Database write error');
 			} else {
 				console.log('Database save succesful');
-				res.end();
+				res.sendFile(__dirname + '/public/submitted.html');
 			}
 		});
 	}
@@ -96,18 +95,18 @@ app.post('/saveperson', function(req, res) {
 //List Database Records to the List in the Submitted Page ======
 
 app.get('/listpersons', function(req, res) {
-	db.query(listItems, function(err, rows) {
+	db.query(listItems, function(err, records) {
 		if(err) {
 			console.log('Error performing database listing.');
-		} else if(!rows.length) {
+		} else if(!records.length) {
 			var display = req.body.firstItem;
 			display = "No records."
 			console.log('No records.');
 		} else {
-			var records = [];
-			for(var i=0; i<rows.length; i++) {
-				records.push(rows[i].firstname);
-				console.log(rows[i]);
+			var results = [];
+			for(var i=0; i<records.length; i++) {
+				results.push(records[i].firstname);
+				console.log(records[i].firstname);
 			}
 		}
 	})
