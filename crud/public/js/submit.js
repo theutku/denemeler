@@ -1,4 +1,6 @@
-function submitform() {
+//Submit User Data to Database ====================================
+
+function submitForm() {
 	var firstName = document.forms['comment']['first_name'].value;
 	var lastName = document.forms['comment']['last_name'].value
 	var emailAdd = document.forms['comment']['email'].value;
@@ -28,7 +30,7 @@ function submitform() {
 		alert('Please enter your comment');
 		return false;
 	}
-
+	
 	$.post("/saveperson",
 		{
 			first_name: firstName,
@@ -45,18 +47,15 @@ function submitform() {
 	return false;
 };
 
+
+//List all the Records in the Database to the Submitted Page =========
 /*
-function getData(){
-
-	$.get("/listpersons", function(data) {
-		console.log(data);
-	});
-}
-*/
-
 function listAll() {
 	$.get("/listpersons"
 	).done(function() {
 		alert('Done');
 	})
 };
+
+$(document).ready(listAll);
+*/

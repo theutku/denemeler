@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 var db = mysql.createConnection({ 
 	host: 'localhost',
 	user: 'root',
+	port: '3400',
 	password: '12345',
 	database: 'quiz'
 });
@@ -68,24 +69,28 @@ db.query(listItems, function(err, results) {
 	}
 });
 
-//Insert Form Data into Database ====
 
+//List Database Records to the List in the Submitted Page ======
+/*
 app.get('/submitted.html', function(req, res) {
 	db.query(listItems, function(err, results) {
 		if(err) {
 			console.log('Error performing database listing.');
 		} else if(!results.length) {
 			var display = req.body.firstItem;
-			display = "No records"
+			display = "No records."
 			console.log('No records.');
 		} else {
-			var records = "";
+			var records = [];
 			for(i=0; i<rows.length; i++) {
 				records += rows[i];
 			}
 		}
 	})
 });
+*/
+
+//Insert Form Data into Database ====
 
 app.post('/saveperson', function(req, res) {
 	var first = req.body.first_name;
