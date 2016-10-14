@@ -19,6 +19,7 @@ div, textarea, input {
   background-color: #fff;
   border: 1px solid #cfcfcf;
   border-bottom: 3px solid #ccc;
+  padding-bottom: 2%;
 }
 
 .row {
@@ -191,7 +192,34 @@ form small {
   display: none;
 }
 
+#recordList h2 {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
 #display {
   font-family: 'Lato', sans-serif;
-   margin: 1em 0 0.4em 0;
+  margin: 1em 0 0.4em 0;
+}
+
+#recordList h3 {
+  color: darkblue;
+  background: #eee;
+  font-weight: bold;
+  margin: 0 0 0 0;
+  padding: 2% 2% 2% 2em;
+  border-bottom: 1px #ddd solid;
+  cursor: pointer;
+}
+
+.cred {
+  background: #ddd;
+  margin: 0 0 0 0;
+  padding: 2% 2% 2% 2em;
+  display: none;
+}
+
+#recnum {
+  font-weight: bold;
+  color: mediumblue;
 }

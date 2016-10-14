@@ -55,14 +55,27 @@ function listAll() {
 	$.get("/listpersons"
 	).done(function(results) {
 
+		//List The Records ===================
+
 		if(!visible){
 			for(var i=0; i<results.length; i++){
 				var name = results[i].firstname;
 				var last = results[i].lastname;
-				$('#recordList').append('<li> ' + name + ' ' + last + '</li>');
+				var mail = results[i].email;
+				var com = results[i].comments;
+				var no = i + 1;
+				$('#recordList').append('<h3>+ ' + name + ' ' + last + "</h3><div class='cred'><p>E - Mail: " + mail + '<br>Comments: ' + com + '</p></div>');
 			}
+			$('#recnum').text(results.length);
 			$('#recordList').slideToggle('slow');
 			visible = true;
+
+			//Accordion Credentials ============
+
+			$('div h3').on('click', function() {
+				$(this).next().slideToggle('fast')
+					.siblings('.cred').slideUp('fast');
+			});
 		} 
 
 	}).fail(function() {
