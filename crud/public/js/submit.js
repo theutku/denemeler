@@ -64,7 +64,7 @@ function listAll() {
 				var mail = results[i].email;
 				var com = results[i].comments;
 				var no = i + 1;
-				$('#recordList').append('<h3>+ ' + name + ' ' + last + "</h3><div class='cred'><p>E - Mail: " + mail + '<br>Comments: ' + com + '</p></div>');
+				$('#recordList').append('<h3>+ ' + name + ' ' + last + "<button id='update'>Update</button><button id='delete'>Delete</button></h3><div class='cred'><p>E - Mail: " + mail + '<br>Comments: ' + com + "</p></div>");
 			}
 			$('#recnum').text(results.length);
 			$('#recordList').slideToggle('slow');
@@ -83,6 +83,16 @@ function listAll() {
 	})
 };
 
+
+//Delete Record from Database
+
+function deleteItem() {
+	var 
+	$.delete("/delete/:id?"
+	).done(function() {
+
+	})
+}
 
 //Character Count and Warning ===========
 
