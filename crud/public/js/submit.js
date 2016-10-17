@@ -115,7 +115,7 @@ function deleteItem() {
 	if(sure){
 		$.post("/delete/" + id, id
 	).done(function() {
-		$(this).closest('h3').css('background', 'red');
+		$parent.remove();
 	})
 	.fail(function() {
 		alert('Error deleting record.');
