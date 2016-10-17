@@ -51,7 +51,8 @@ app.listen(3946, function(err) {
 
 var listItems = 'SELECT * from crudtable';
 var insertItem = 'INSERT INTO crudtable(firstname, lastname, email, comments, date) VALUE(?, ?, ?, ?, ?)';
-var updateItem = 'UPDATE crudtable SET '
+var updateItem = 'UPDATE crudtable SET firstname = ?, lastname = ?, email = ?, comments = ?, date = ? WHERE id = ?';
+var deleteItem = 'DELETE from crudtable WHERE id = ?'
 
 
 //List Database Records ==============
@@ -109,4 +110,28 @@ app.get('/listpersons', function(req, res) {
 			res.send(rows);
 		}
 	})
+});
+
+
+//Update a Record in Database
+/*
+app.put('/update', function(req, res) {
+	db.query()
+});
+*/
+
+
+//Delete a Record in Database
+
+app.post('/delete/:id?', function(req, res) {
+	var itemId = req.params.id;
+
+	db.query(deleteItem, itemId, function(err) {
+		if(err){
+			res.sendStatus(500);
+			console.log('Error updating database.');
+		}else {
+			res.end();
+		}
+	});
 });

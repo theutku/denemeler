@@ -30,7 +30,7 @@ div, textarea, input {
 .row.header {
   padding: 1.5em 2.5em;
   border-bottom: 1px solid #ccc;
-  background: url(http://niiiick.com/files/blur-city-1.jpg) left -80px;
+  background: url(/img/blur-city-1.jpg) left -80px;
   color: #fff;
 }
 .row.body {
@@ -223,3 +223,69 @@ form small {
   font-weight: bold;
   color: mediumblue;
 }
+
+.deleted {
+  background: red;
+}
+.rows {
+  position: relative;
+}
+
+.buttons {
+  display: none;
+  background: #eee;
+}
+
+.update {
+  font-weight: bold;
+  display: inline-block;
+  background: #ddd;
+  border-radius: 5px;
+  padding: 0.25em;
+  font-size: 0.75em;
+  width: 15%;
+  box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+
+}
+
+.delete {
+  font-weight: bold;
+  display: inline-block;
+  background:#ddd;
+  padding: 0.25em;
+  border-radius: 5px;
+  font-size: 0.75em;
+  width: 15%;
+  box-shadow: 0 0 1px 1px rgba(255,255,255,.8) inset, 0 1px 0 rgba(0,0,0,.3);
+}
+
+.delete:hover {
+    background-color: red;       
+    background-image: linear-gradient(top, #fafafa, #ddd);
+}
+
+.update:hover {
+    background-color: limegreen;       
+    background-image: linear-gradient(top, #fafafa, #ddd);
+}
+
+.delete:before {
+    background: #ccc;
+    background: rgba(0,0,0,.1);
+    float: left;        
+    width: 1em;
+    text-align: center;
+    padding: 0 .2em;
+    content: "\2718";        
+}
+
+.update:before {
+    background: #ccc;
+    background: rgba(0,0,0,.1);
+    float: left;        
+    width: 1em;
+    text-align: center;
+    padding: 0 .2em;
+    content: "\270E";        
+}
+
