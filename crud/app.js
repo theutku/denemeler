@@ -116,7 +116,7 @@ app.get('/listpersons', function(req, res) {
 
 //Update a Record in Database
 /*
-app.put('/update'i function(req, res) {
+app.put('/update', function(req, res) {
 	db.query()
 });
 */
@@ -124,7 +124,7 @@ app.put('/update'i function(req, res) {
 
 //Delete a Record in Database
 
-app.delete('/delete/:id?', function(req, res) {
+app.post('/delete/:id?', function(req, res) {
 	var itemId = req.params.id;
 
 	db.query(deleteItem, itemId, function(err) {
@@ -132,7 +132,7 @@ app.delete('/delete/:id?', function(req, res) {
 			res.sendStatus(500);
 			console.log('Error updating database.');
 		}else {
-			res.send();
+			res.end();
 		}
 	});
 });
