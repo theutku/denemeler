@@ -18,6 +18,7 @@ app.use(bodyParser.json());
 var db = mysql.createConnection({ 
 	host: 'localhost',
 	user: 'root',
+	port: '3400',
 	password: '12345',
 	database: 'quiz'
 });
@@ -112,6 +113,11 @@ app.get('/listpersons', function(req, res) {
 	})
 });
 
+
+//Send Update Page on Selection
+
+app.get('/update/:id?', function(req, res) {
+});
 
 //Update a Record in Database
 /*

@@ -113,7 +113,7 @@ function deleteItem() {
 	var sure = confirm('Are you sure?');
 
 	if(sure){
-		$.post("/delete/" + id, id
+		$.post("/delete/" + id
 	).done(function() {
 		$parent.remove();
 	})
@@ -125,10 +125,12 @@ function deleteItem() {
 };
 
 
-//Update Record in Database ====================
+//Redirect to Update Page ====================
 
 function updateItem() {
-	location.href = "/update.html";
+	var $parent = $(this).closest('.rows');
+	var index = $parent.index('.rows');
+	var id = itemIds[index];
 }
 
 //Character Count and Warning ===========
