@@ -134,10 +134,10 @@ function updatePage() {
 	window.location.href = "/update.html";
 	$.get("/get/" + id
 	).done(function(result) {
-		$('#fname').val(result.firstname);
-		$('#lname').val(result.lastname);
-		$('#emailAdd').val(result.email);
-		$('#comment').val(result.comments);
+		$('#fname').val(result[0].firstname);
+		$('#lname').val(result[0].lastname);
+		$('#emailAdd').val(result[0].email);
+		$('#comment').val(result[0].comments);
 	})
 	.fail(function() {
 		alert("Error getting saved record");
