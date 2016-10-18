@@ -72,7 +72,7 @@ function listAll() {
 			//Call Delete and Update Functions on Click============
 
 			$('.delete').on('click', deleteItem);
-			$('.update').on('click', updateItem);
+			$('.update').on('click', updatePage);
 
 			//Display Total Records ==================
 
@@ -127,10 +127,21 @@ function deleteItem() {
 
 //Redirect to Update Page ====================
 
-function updateItem() {
+function updatePage() {
 	var $parent = $(this).closest('.rows');
 	var index = $parent.index('.rows');
 	var id = itemIds[index];
+	window.location.href = "/update.html";
+	$.get("/get/" + id
+	).done(function(result) {
+		$('#fname').val(result.firstname);
+		$('#lname').val(result.lastname);
+		$('#emailAdd').val(result.email);
+		$('#comment').val(result.comments);
+	})
+	.fail(function() {
+		alert("Error getting saved record");
+	})
 }
 
 //Character Count and Warning ===========
