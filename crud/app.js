@@ -103,7 +103,7 @@ app.get('/listpersons', function(req, res) {
 			res.sendStatus(500);
 			console.log('Error performing database listing.');
 		} else if(rows.length == 0) {
-			res.send('No Records');
+			res.send(rows);
 			console.log('No records.');
 		} else {
 			for(var i=0; i<rows.length; i++) {

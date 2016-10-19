@@ -57,7 +57,11 @@ function listAll() {
 	).done(function(results) {
 
 		//List The Records ===================
-
+		if(results.length == 0 || results.length == null) {
+			$('#recnum').text('No Records');
+			$('#recordList').slideToggle('slow');
+		} else {
+			
 		if(!visible){
 			for(var i=0; i<results.length; i++){
 				var name = results[i].firstname;
@@ -95,6 +99,7 @@ function listAll() {
 				$(this).nextAll('.cred').eq(0).slideToggle('fast')
 					.siblings('.cred').slideUp('fast');
 			});
+		} 
 		} 
 
 	}).fail(function() {
