@@ -144,6 +144,7 @@ function updatePage() {
 	})
 }
 
+
 //Character Count and Warning ===========
 
 $(document).ready(function() {
