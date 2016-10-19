@@ -1,0 +1,44 @@
+{
+    "guitarists": [{
+        "title": "Jimi Hendrix",
+        "name": "Johnny Allen Hendrix",
+        "shortname": "Jimi_Hendrix",
+        "life": "27 November 1942 – 18 September 1970",
+        "summary": "James Marshall 'Jimi' Hendrix  was an American rock guitarist, singer, and songwriter. Although his mainstream career spanned only four years, he is widely regarded as one of the most influential electric guitarists in the history of popular music, and one of the most celebrated             musicians of the 20th century. The Rock and Roll Hall of Fame describes him as 'arguably the greatest instrumentalist in the history of rock music'",
+        "artwork": ["Jimi_Hendrix_01.jpg", "Jimi_Hendrix_01_tn.jpg", "Jimi_Hendrix_02.jpg", "Jimi_Hendrix_02_tn.jpg", "Jimi_Hendrix_03.jpg", "Jimi_Hendrix_03_tn.jpg"]
+    },{
+        "title": "Eric Clapton",
+        "name": "Eric Patrick Clapton",
+        "shortname": "Eric_Clapton",
+        "life": "30 March 1945 - ",
+        "summary": "Eric Patrick Clapton is an English rock and blues guitarist, singer, and songwriter. He is the only three-time inductee to the Rock and Roll Hall of Fame: once as a solo artist and separately as a member of the Yardbirds and Cream. Clapton has been referred to as one of the most             important and influential guitarists of all time.[1] Clapton ranked second in Rolling Stone magazine's list of the '100 Greatest Guitarists of All Time' and fourth in Gibson's 'Top 50 Guitarists of All Time'. He was also named number five in Time magazine's list of 'The 10                   Best Electric Guitar Players' in 2009",
+        "artwork": ["Eric_Clapton_01.jpg", "Eric_Clapton_01_tn.jpg", "Eric_Clapton_02.jpg", "Eric_Clapton_02_tn.jpg", "Eric_Clapton_03.jpg", "Eric_Clapton_03_tn.jpg"]
+    },{
+        "title": "Slash",
+        "name": "Saul Hudson",
+        "shortname": "Slash",
+        "life": "23 July 1965 - ",
+        "summary": "Saul Hudson, known professionally as Slash, is a British-American musician and songwriter. He is best known as the lead guitarist of the American rock band Guns N' Roses, with whom he achieved worldwide success in the late 1980s and early 1990s. During his later years with Guns              N' Roses, Slash formed the side project Slash's Snakepit. After leaving Guns N' Roses in 1996, he co-founded the supergroup Velvet Revolver, which re-established him as a mainstream performer in the mid to late 2000s.",
+        "artwork": ["Slash_01.jpg", "Slash_01_tn.jpg", "Slash_02.jpg", "Slash_02_tn.jpg", "Slash_03.jpg", "Slash_03_tn.jpg"]
+    }],
+
+    "social": [{
+        "shortname": "twitter",
+        "img": "/images/social/twitter.png",
+        "url": "http://www.twitter.com"
+    },{
+        "shortname": "facebook",
+        "img": "/images/social/facebook.png",
+        "url": "http://www.facebook.com"
+    }],
+
+    "creation": {
+        "date": "19 October 2016",
+        "time": "3:21 pm",
+        "where": {
+            "name": "Utku - PC",
+            "img": "/images/misc/node_js.jpg",
+            "Address": "Ankara"
+        }
+    }
+}

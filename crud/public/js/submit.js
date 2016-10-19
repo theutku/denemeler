@@ -57,50 +57,53 @@ function listAll() {
 	).done(function(results) {
 
 		//List The Records ===================
+		
 		if(results.length == 0 || results.length == null) {
+
 			$('#recnum').text('No Records');
 			$('#recordList').slideToggle('slow');
+
 		} else {
-			
-		if(!visible){
-			for(var i=0; i<results.length; i++){
-				var name = results[i].firstname;
-				var last = results[i].lastname;
-				var mail = results[i].email;
-				var com = results[i].comments;
-				var id = results[i].id;
-				$('#recordList').append("<div class='rows'><h3>+ " + name + ' ' + last + "</h3><div class='buttons'><button class='update'> | Update</button><br/><button class='delete'> | Delete</button></div><div class='cred'><p>E - Mail: " + mail + '<br>Comments: ' + com + "</p></div></div>");
-				itemIds.push(id);
-			}
 
-			//Call Delete and Update Functions on Click============
+			if(!visible){
+				for(var i=0; i<results.length; i++){
+					var name = results[i].firstname;
+					var last = results[i].lastname;
+					var mail = results[i].email;
+					var com = results[i].comments;
+					var id = results[i].id;
+					$('#recordList').append("<div class='rows'><h3>+ " + name + ' ' + last + "</h3><div class='buttons'><button class='update'> | Update</button><br/><button class='delete'> | Delete</button></div><div class='cred'><p>E - Mail: " + mail + '<br>Comments: ' + com + "</p></div></div>");
+					itemIds.push(id);
+				}
 
-			$('.delete').on('click', deleteItem);
-			$('.update').on('click', updatePage);
+				//Call Delete and Update Functions on Click============
 
-			//Display Total Records ==================
+				$('.delete').on('click', deleteItem);
+				$('.update').on('click', updatePage);
 
-			$('#recnum').text(results.length);
-			$('#recordList').slideToggle('slow');
-			visible = true;
+				//Display Total Records ==================
 
-			//Display Update and Delete Buttons on Hover ==============
+				$('#recnum').text(results.length);
+				$('#recordList').slideToggle('slow');
+				visible = true;
 
-			$('.rows').on('mouseenter', function() {
-				$(this).children('.buttons').slideToggle('fast');
-			})
-			.on('mouseleave', function() {
-				$(this).children('.buttons').slideToggle('fast');
-			});
+				//Display Update and Delete Buttons on Hover ==============
 
-			//Accordion Credentials ============
+				$('.rows').on('mouseenter', function() {
+					$(this).children('.buttons').slideToggle('fast');
+				})
+				.on('mouseleave', function() {
+					$(this).children('.buttons').slideToggle('fast');
+				});
 
-			$('div h3').on('click', function() {
-				$(this).nextAll('.cred').eq(0).slideToggle('fast')
-					.siblings('.cred').slideUp('fast');
-			});
-		} 
-		} 
+				//Accordion Credentials ============
+
+				$('div h3').on('click', function() {
+					$(this).nextAll('.cred').eq(0).slideToggle('fast')
+						.siblings('.cred').slideUp('fast');
+				});
+			} 
+		}
 
 	}).fail(function() {
 		alert('Error displaying results');
