@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
@@ -15,10 +16,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(__dirname + '/public'));
 
+//Require Guitarist Data ============
+
 app.locals.appdata = require('./data.json');
 
+//Use Routes File for Routing ========
 
-//Listen Connection ================
+app.use('/', routes)
+
+//Listen Connection ==================
 
 app.listen(3000, function(err) {
     if(err) {
@@ -38,7 +44,7 @@ app.use(function(req, res, next) {
 });
 
 
-// development error handler
+// development error handler ===============
 
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
@@ -51,7 +57,7 @@ if (app.get('env') === 'development') {
 }
 
 
-// production error handler
+// production error handler ========
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -61,10 +67,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
+//Export App =========================
 module.exports = app;
 
-//Define Routes for the App =======
-
-app.get('/', routes.index);
-app.get('*', routes.badRoute);

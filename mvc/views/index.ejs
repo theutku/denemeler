@@ -6,11 +6,19 @@
 
 <body>
     <% include partials/template/header.ejs %>
+    <% include partials/content/guitaristslist.ejs %>
+    <section class="layout">
+        <div class="primary">
+            <% include partials/content/whoarewe.ejs %>
+            <% include partials/content/getbusy.ejs %>
+            <% include partials/content/whoshouldread.ejs %>
+        </div>
+        <aside class="secondary">
+            <% include partials/content/creation.ejs %>
+            <% include partials/content/artworklist.ejs %>
+        </aside>
+    </section>
 
-    	<h1><%= title %></h1>
-        <p>Welcome to <%= title %></p>
-
-    
     <% include partials/template/footer.ejs %>
     <% include partials/template/jsdefaults.ejs %>
 </body>

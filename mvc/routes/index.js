@@ -1,11 +1,14 @@
-exports.index = function(req, res) {
-    res.render('index', {
-        title: 'Welcome'
-    });
-};
+//Define Modules ========================
 
-exports.badRoute = function(req, res) {
-    res.render('error', {
-        title: 'Bad Route!'
-    });
-};
+var express = require('express');
+var router = express.Router();
+
+
+//Get HomePage ==========================
+
+router.get('/', function(req, res) {
+  res.render('index', { 
+      title: 'Express' });
+});
+
+module.exports = router;

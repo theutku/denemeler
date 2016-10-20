@@ -37,8 +37,8 @@
         "time": "3:21 pm",
         "where": {
             "name": "Utku - PC",
-            "img": "/images/misc/node_js.jpg",
-            "Address": "Ankara"
+            "img": "/images/misc/nodejs.png",
+            "address": "Ankara"
         }
     }
 }
