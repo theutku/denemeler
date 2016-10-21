@@ -4,14 +4,11 @@
     <% include partials/template/head.ejs %>
 </head>
 
-<body class="<%= page %>">
+<body>
     <% include partials/template/header.ejs %>
-    <% include partials/content/guitaristslist.ejs %>
     <section class="layout">
         <div class="primary">
-            <% include partials/content/whoarewe.ejs %>
-            <% include partials/content/getbusy.ejs %>
-            <% include partials/content/whoshouldread.ejs %>
+            <% include partials/content/guitaristslist.ejs %>
         </div>
         <aside class="secondary">
             <% include partials/content/creation.ejs %>
