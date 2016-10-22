@@ -30,11 +30,11 @@ function submitForm() {
 		alert('Please enter your comment');
 		return false;
 	}
-	
+
 	$.post("/saveperson",
 		{
 			first_name: firstName,
-			last_name:  lastName,
+			last_name: lastName,
 			email: emailAdd,
 			comments: comment
 
@@ -54,19 +54,19 @@ var itemIds = [];
 var visible = false;
 function listAll() {
 	$.get("/listpersons"
-	).done(function(results) {
+	).done(function (results) {
 
 		//List The Records ===================
-		
-		if(results.length == 0 || results.length == null) {
+
+		if (results.length == 0 || results.length == null) {
 
 			$('#recnum').text('No Records');
 			$('#recordList').slideToggle('slow');
 
 		} else {
 
-			if(!visible){
-				for(var i=0; i<results.length; i++){
+			if (!visible) {
+				for (var i = 0; i < results.length; i++) {
 					var name = results[i].firstname;
 					var last = results[i].lastname;
 					var mail = results[i].email;
@@ -89,23 +89,23 @@ function listAll() {
 
 				//Display Update and Delete Buttons on Hover ==============
 
-				$('.rows').on('mouseenter', function() {
+				$('.rows').on('mouseenter', function () {
 					$(this).children('.buttons').slideToggle('fast');
 				})
-				.on('mouseleave', function() {
-					$(this).children('.buttons').slideToggle('fast');
-				});
+					.on('mouseleave', function () {
+						$(this).children('.buttons').slideToggle('fast');
+					});
 
 				//Accordion Credentials ============
 
-				$('div h3').on('click', function() {
+				$('div h3').on('click', function () {
 					$(this).nextAll('.cred').eq(0).slideToggle('fast')
 						.siblings('.cred').slideUp('fast');
 				});
-			} 
+			}
 		}
 
-	}).fail(function() {
+	}).fail(function () {
 		alert('Error displaying results');
 	})
 };
@@ -120,16 +120,16 @@ function deleteItem() {
 
 	var sure = confirm('Are you sure?');
 
-	if(sure){
+	if (sure) {
 		$.post("/delete/" + id
-	).done(function() {
-		$parent.remove();
-	})
-	.fail(function() {
-		alert('Error deleting record.');
-	})
+		).done(function () {
+			$parent.remove();
+		})
+			.fail(function () {
+				alert('Error deleting record.');
+			})
 	}
-	
+
 };
 
 
@@ -139,32 +139,25 @@ function updatePage() {
 	var $parent = $(this).closest('.rows');
 	var index = $parent.index('.rows');
 	var id = itemIds[index];
+	utku.updateid = id;
 	window.location.href = "/update.html";
-	$.get("/get/" + id
-	).done(function(result) {
-		$('#fname').val(result[0].firstname);
-		$('#lname').val(result[0].lastname);
-		$('#emailAdd').val(result[0].email);
-		$('#comment').val(result[0].comments);
-	})
-	.fail(function() {
-		alert("Error getting saved record");
-	})
+	//window.location.href = "/update.html?updateid=" + id;
+
 }
 
 
 //Character Count and Warning ===========
 
-$(document).ready(function() {
+$(document).ready(function () {
 	var maxLength = 300;
-		$('textarea').keyup(function() {
-			var charLength = $(this).val().length;
-			var char = maxLength - charLength;
-			$('#charcount').text(char);
-			if(charLength > 250) {
-				$('#charcount').addClass('charExceed');
-			} else {
-				$('#charcount').removeClass('charExceed');
-			}
-		});
+	$('textarea').keyup(function () {
+		var charLength = $(this).val().length;
+		var char = maxLength - charLength;
+		$('#charcount').text(char);
+		if (charLength > 250) {
+			$('#charcount').addClass('charExceed');
+		} else {
+			$('#charcount').removeClass('charExceed');
+		}
+	});
 })
