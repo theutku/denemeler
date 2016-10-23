@@ -10,63 +10,71 @@ var appdata = require('../data.json');
 
 //Get HomePage ==========================
 
-router.get('/', function(req, res) {
+router.get('/', function (req, res) {
   var myArtwork = [];
   var myGuitarists = appdata.guitarists;
 
-  myGuitarists.forEach(function(item) {
+  myGuitarists.forEach(function (item) {
     myArtwork = myArtwork.concat(item.artwork);
   });
-  res.render('index', { 
-      title: 'Top Guitarists',
-      artwork: myArtwork,
-      guitarists: myGuitarists,
-      page: 'home' 
-    });
+  res.render('index', {
+    title: 'Top Guitarists',
+    artwork: myArtwork,
+    guitarists: myGuitarists,
+    page: 'home'
+  });
 });
 
 
 //GET Guitarists Page ==================
 
-router.get('/guitarists', function(req, res) {
+router.get('/guitarists', function (req, res) {
   var myArtwork = [];
   var myGuitarists = appdata.guitarists;
 
-  appdata.guitarists.forEach(function(item) {
+  appdata.guitarists.forEach(function (item) {
     myArtwork = myArtwork.concat(item.artwork);
   });
-  res.render('guitarists', { 
-      title: 'Guitarists',
-      artwork: myArtwork,
-      guitarists: myGuitarists,
-      page: 'guitaristList' 
-    });
+  res.render('guitarists', {
+    title: 'Guitarists',
+    artwork: myArtwork,
+    guitarists: myGuitarists,
+    page: 'guitaristList'
+  });
 });
 
 
 //GET Specific Guitarists Page ==================
 
-router.get('/guitarists/:guitaristid', function(req, res) {
+router.get('/guitarists/:guitaristid', function (req, res) {
   var myArtwork = [];
   var myGuitarists = [];
 
-  appdata.guitarists.forEach(function(item) {
-    if(item.shortname == req.params.guitaristid) {
+  appdata.guitarists.forEach(function (item) {
+    if (item.shortname == req.params.guitaristid) {
       myGuitarists.push(item);
       myArtwork = myArtwork.concat(item.artwork);
 
     }
   });
-  res.render('guitarists', { 
-      title: 'Guitarists',
-      artwork: myArtwork,
-      guitarists: myGuitarists,
-      page: 'guitarist' 
-    });
+  res.render('guitarists', {
+    title: 'Guitarists',
+    artwork: myArtwork,
+    guitarists: myGuitarists,
+    page: 'guitarist'
+  });
 });
+
 
 //GET Error Page
 
+router.get('*', function (req, res) {
+  res.render('error', {
+    title: 'Error',
+    message: 'Page not Found!',
+    page: 'error'
+  })
+})
 
 //Export Module ================================
 

@@ -419,3 +419,38 @@ header .navigation ul.nav li:hover a {
   }
 }
 
+.error header .hero {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 450px;
+    background: -webkit-gradient(linear, 0% 100%, 100% 0%, color-stop(0%, rgba(4, 32, 41, 0.6)), color-stop(100%, rgba(4, 32, 41, 0))), url('../../images/misc/helper.jpg?1378515912');
+    background: -webkit-linear-gradient(bottom left, rgba(4, 32, 41, 0.6), rgba(4, 32, 41, 0)), url('../../images/misc/broken_string.jpg?1378515912');
+    background: -moz-linear-gradient(bottom left, rgba(4, 32, 41, 0.6), rgba(4, 32, 41, 0)), url('../../images/misc/broken_string.jpg?1378515912');
+    background: -o-linear-gradient(bottom left, rgba(4, 32, 41, 0.6), rgba(4, 32, 41, 0)), url('../../images/misc/broken_string.jpg?1378515912');
+    background: linear-gradient(bottom left, rgba(4, 32, 41, 0.6), rgba(4, 32, 41, 0)), url('../../images/misc/broken_string.jpg?1378515912');
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    margin: 0 auto;
+    display: block;
+    -webkit-transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -o-transition: all 1s ease-out;
+    transition: all 1s ease-out;
+  }
+
+  header .hero .branding {
+    position: absolute;
+    bottom: 0;
+    color: white;
+    font-size: 2em;
+  }
+
+  header .hero .branding a{
+    bottom: 0;
+    color: cornflowerblue;
+  }

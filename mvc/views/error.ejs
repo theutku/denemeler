@@ -1,13 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <% include partials/template/head.ejs %>
+	<% include partials/template/head.ejs %>
 </head>
 
-<body>
-    <% include partials/template/header.ejs %>
+<body class="<%=page %>">
+
+    <header>
+        <div class="hero">
+        <section class="layout">
+            <div class="branding">
+                <p>Oops! <%= message %><p>
+                <p><a href="/"><i class="icon-home"></i>Home</a></p>
+            </div>
+        </section>
+    </div>
+    </header>
     
-    <% include partials/template/footer.ejs %>
+
+	<% include partials/template/footer.ejs %>
     <% include partials/template/jsdefaults.ejs %>
 </body>
+
 </html>
