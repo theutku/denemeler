@@ -8,9 +8,20 @@ var router = express.Router();
 
 var appdata = require('../data.json');
 
-//Get HomePage ==========================
+//Get Login Page ==========================
 
 router.get('/', function (req, res) {
+  
+  res.render('login', {
+    title: 'Welcome',
+    page: 'login'
+  });
+});
+
+
+//Get HomePage ==========================
+
+router.get('/home', function (req, res) {
   var myArtwork = [];
   var myGuitarists = appdata.guitarists;
 
@@ -58,23 +69,13 @@ router.get('/guitarists/:guitaristid', function (req, res) {
     }
   });
   res.render('guitarists', {
-    title: 'Guitarists',
+    title: myGuitarists[0].title,
     artwork: myArtwork,
     guitarists: myGuitarists,
     page: 'guitarist'
   });
 });
 
-
-//GET Error Page
-
-router.get('*', function (req, res) {
-  res.render('error', {
-    title: 'Error',
-    message: 'Page not Found!',
-    page: 'error'
-  })
-})
 
 //Export Module ================================
 

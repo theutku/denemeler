@@ -62,8 +62,9 @@ if (app.get('env') === 'development') {
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
-        message: err.message,
-        error: {}
+        title: 'Error',
+        message: 'Something went wrong!',
+        page: 'error',
     });
 });
 
