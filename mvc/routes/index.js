@@ -13,7 +13,7 @@ var appdata = require('../data.json');
 router.get('/', function (req, res) {
   
   res.render('login', {
-    title: 'Welcome',
+    title: 'Top Guitarists - Welcome',
     page: 'login'
   });
 });

@@ -444,8 +444,6 @@ header .navigation ul.nav li:hover a {
   }
 
   header .hero .branding {
-    position: absolute;
-    bottom: 0;
     color: white;
     font-size: 2em;
   }
