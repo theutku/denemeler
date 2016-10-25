@@ -79,9 +79,17 @@ body {
 }
 
 .page-header{
-  margin-top: .5em;
+  margin-top: 0;
 }
 
 footer {
-  margin-top: 2em;
+  margin-top: 4em;
+}
+
+.alert-danger {
+  display: none;
+}
+
+.alert-success {
+  display: none;
 }
