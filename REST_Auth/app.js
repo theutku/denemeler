@@ -1,53 +1,101 @@
-//Require Tools =================================
+//Require Modules ========================================
+
 var express = require('express');
-var app = express();
-var port = process.env.PORT || 3946;
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var passport = require('passport');
-var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var passport = require('passport');
+var logger = require('morgan');
+var expressValidator = require('express-validator');
+var mongo = require('mongodb');
+var flash = require('connect-flash');
 var session = require('express-session');
+var LocalStrategy = require('passport-local').Strategy;
 
-var configDB = require('./config/database.js');
+var port = (process.env.PORT || 3000);
 
-//Connect to Database ===========================
+var routes = require('./routes/index');
+var users = require('./routes/users');
 
-mongoose.connect(configDB.url);
+var app = express();
 
-//Set App Requirements ==========================
+//Connect to Database ====================================
+
+var db = mongoose.connection;
+mongoose.connect('mongodb://localhost/authapp');
+
+//Set Public Folder ======================================
+
+app.use(express.static(__dirname + '/public'));
+
+//Set View Engine ========================================
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-app.use(logger('dev')); 
-app.use(cookieParser()); 
+//BodyParser =============================================
+
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
 
-require('./config/passport')(passport)
- 
+//Passport ===============================================
 
-//Passport Requirements =========================
-
-app.use(session({secret: 'utkuisthebest'}));
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Express Session ========================================
+
+app.use(session({
+    secret: 'utkuisthebest',
+    saveUninitialized: true,
+    resave: true
+}));
+
+//Validator ==============================================
+
+app.use(expressValidator({
+  errorFormatter: function(param, msg, value) {
+      var namespace = param.split('.')
+      , root    = namespace.shift()
+      , formParam = root;
+
+    while(namespace.length) {
+      formParam += '[' + namespace.shift() + ']';
+    }
+    return {
+      param : formParam,
+      msg   : msg,
+      value : value
+    };
+  }
+}));
+
+//Connect Flash ==========================================
+
 app.use(flash());
 
-//Routes ========================================
+//Global Messages ========================================
 
-require('./routes/index')(app, passport);
+app.use(function(req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
 
-//Launch App ====================================
+//Routes =================================================
+
+app.use('/', routes);
+app.use('/users', users);
+
+//Listen App =============================================
 
 app.listen(port, function(err) {
     if(err) {
-        console.log('Error listening connection.');
+        console.log(err);
+        throw err;
     } else {
-        console.log('Listening on port ' + this.address().port);
+        console.log('App started listening at port ' + this.address().port);
     }
 })
-
-module.exports = app;
