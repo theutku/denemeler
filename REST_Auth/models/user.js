@@ -33,3 +33,30 @@ module.exports.createUser = function(newUser, callback) {
         })
     })
 }
+
+//PASSPORT ===========================================
+//Find User by Name ==================================
+
+module.exports.getUserByUsername = function(username, callback) {
+    var query = {username: username};
+    User.findOne(query, callback);
+}
+
+//Compare Passwords ==================================
+
+module.exports.comparePassword = function(candidatePassword, hash, callback) {
+    bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+        if(err) {
+            console.log(err);
+            throw err;
+        } else {
+            callback(null, isMatch);
+        }
+    });
+}
+
+//Find User by ID ====================================
+
+module.exports.findUserById = function(id, callback) {
+    User.findById(id, callback);
+}
