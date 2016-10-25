@@ -7,7 +7,6 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var logger = require('morgan');
 var expressValidator = require('express-validator');
-var mongo = require('mongodb');
 var flash = require('connect-flash');
 var session = require('express-session');
 var LocalStrategy = require('passport-local').Strategy;
@@ -16,6 +15,7 @@ var port = (process.env.PORT || 3000);
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var User = require('./models/user');
 
 var app = express();
 
@@ -41,16 +41,13 @@ app.use(cookieParser());
 
 //Passport ===============================================
 
-app.use(passport.initialize());
-app.use(passport.session());
-
-//Express Session ========================================
-
 app.use(session({
     secret: 'utkuisthebest',
     saveUninitialized: true,
     resave: true
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Validator ==============================================
 
@@ -74,6 +71,44 @@ app.use(expressValidator({
 //Connect Flash ==========================================
 
 app.use(flash());
+
+//PASSPORT ===============================================
+//Validate Password ======================================
+
+passport.use(new LocalStrategy(function (username, password, done) {
+    User.getUserByUsername(username, function (err, user) {
+        if (err) {
+            console.log(err);
+           done(err);
+        }
+        if (!user) {
+            return done(null, false, { message: 'Username is invalid.' });
+        }
+        User.comparePassword(password, user.password, function (err, isMatch) {
+            if (err) {
+                console.log(err);
+                throw err;
+            }
+            if (isMatch) {
+                return done(null, user);
+            } else {
+                return done(null, false, { message: 'Incorrect Password!' })
+            }
+        });
+    });
+}));
+
+//Serialize and Deserialize =============================
+
+passport.serializeUser(function (user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function (id, done) {
+    User.getUserById(id, function (err, user) {
+        return done(err, user);
+    });
+});
 
 //Global Messages ========================================
 
