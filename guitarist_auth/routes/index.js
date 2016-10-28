@@ -10,9 +10,8 @@ var appdata = require('../data.json');
 //Get Login Page ==========================
 
 router.get('/', function (req, res) {
-  
   res.render('index', {
-    title: 'Top Guitarists - Welcome',
+    title: 'Top Guitarists - Welcome'
   });
 });
 

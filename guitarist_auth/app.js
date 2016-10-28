@@ -7,8 +7,8 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+//var passport = require('passport');
+//var LocalStrategy = require('passport-local').Strategy;
 var expressValidator = require('express-validator');
 var flash = require('connect-flash');
 
@@ -33,11 +33,11 @@ app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
 
-// app.use(session({
-//     secret: 'utkuauth',
-//     saveUninitialized: true,
-//     resave: true
-// }))
+app.use(session({
+    secret: 'utkuauth',
+    saveUninitialized: true,
+    resave: true
+}));
 // app.use(passport.initialize());
 // app.use(passport.session());
 
@@ -52,7 +52,7 @@ app.use(function(req, res, next) {
     res.locals.errorMsg = req.flash('error_msg');
     res.locals.error = req.flash('error');
     next();
-})
+});
 
 // catch 404 and forwarding to error handler
 
@@ -78,6 +78,7 @@ if (app.get('env') === 'development') {
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    console.log(err);
     res.render('error', {
         title: 'Error',
         message: 'Something went wrong!',
