@@ -1,0 +1,19 @@
+<article class="guitaristslist">
+    <section class="layout">
+        <div class="guitarists">
+            <% guitarists.forEach(function(item) { %>
+                <article class="guitarist group">
+                    <h3><%= item.title %> <span class="small"> a.k.a <a href="/guitarists/<%= item.shortname %>"><%= item.name %></a></span></h3>
+                    <p><a href="/guitarists/<%= item.shortname %>"><img src="/images/guitarists/<%= item.shortname %>.jpg" alt="Photo of <%= item.name %>" class="guitarist"></a>
+                        <% if(page != 'guitarist') { %>
+                            <% if(page == 'guitaristList') { %>
+                            <%= item.summary %>
+                        <% }} else { %>
+                            <%- item.detail %>
+                        <% } %>
+                    </p>
+                </article>
+            <% }); %>
+        </div>
+    </section>
+</article>

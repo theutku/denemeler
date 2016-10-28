@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/template/head.ejs %>
+</head>
+
+<body>
+    <% include partials/template/header.ejs %>
+    <section class="layout">
+        <div class="primary">
+            <% include partials/content/guitaristslist.ejs %>
+        </div>
+        <aside class="secondary">
+            <% include partials/content/creation.ejs %>
+            <% include partials/content/artworklist.ejs %>
+        </aside>
+    </section>
+
+    <% include partials/template/footer.ejs %>
+    <% include partials/template/jsdefaults.ejs %>
+</body>
+</html>
