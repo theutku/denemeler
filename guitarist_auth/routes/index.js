@@ -3,7 +3,6 @@
 var express = require('express');
 var router = express.Router();
 
-
 //Require Guitarists Data ==============
 
 var appdata = require('../data.json');
@@ -16,7 +15,6 @@ router.get('/', function (req, res) {
     title: 'Top Guitarists - Welcome',
   });
 });
-
 
 //Get HomePage ==========================
 
@@ -35,7 +33,6 @@ router.get('/home', function (req, res) {
   });
 });
 
-
 //GET Guitarists Page ==================
 
 router.get('/guitarists', function (req, res) {
@@ -52,7 +49,6 @@ router.get('/guitarists', function (req, res) {
     page: 'guitaristList'
   });
 });
-
 
 //GET Specific Guitarists Page ==================
 
@@ -74,7 +70,6 @@ router.get('/guitarists/:guitaristid', function (req, res) {
     page: 'guitarist'
   });
 });
-
 
 //Export Module ================================
 

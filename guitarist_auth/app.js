@@ -16,7 +16,7 @@ var port = process.env.PORT || 3000;
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var User = require('./models/user');
+// var User = require('./models/user');
 
 //Set View Engine ====================================
 
@@ -29,8 +29,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
-app.use(express.static(__dirname + '/public'));
 app.use(flash());
+
+app.use(express.static(__dirname + '/public'));
 
 // app.use(session({
 //     secret: 'utkuauth',
@@ -45,6 +46,7 @@ app.use(flash());
 app.locals.appdata = require('./data.json');
 
 // Global Messages ===================================
+
 app.use(function(req, res, next) {
     res.locals.successMsg = req.flash('success_msg');
     res.locals.errorMsg = req.flash('error_msg');
