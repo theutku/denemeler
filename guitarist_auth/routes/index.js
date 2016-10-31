@@ -11,7 +11,7 @@ var appdata = require('../data.json');
 
 router.get('/', function (req, res) {
   res.render('index', {
-    title: 'Top Guitarists - Welcome'
+    title: 'Top Guitarists - Welcome',
   });
 });
 
@@ -24,7 +24,7 @@ router.get('/home', function (req, res) {
   myGuitarists.forEach(function (item) {
     myArtwork = myArtwork.concat(item.artwork);
   });
-  res.render('index', {
+  res.render('home', {
     title: 'Top Guitarists',
     artwork: myArtwork,
     guitarists: myGuitarists,
