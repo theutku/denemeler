@@ -2,6 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
+var Sql = require('../models/user');
 
 //GET Login Page ============================
 
@@ -45,6 +46,8 @@ router.post('/register', function(req, res) {
             errors: formErrors
         });
     } else {
+        var date = new Date();
+        Sql.sqlInsert(name, username, email, password, date);
         res.redirect('/home');
     }
 });

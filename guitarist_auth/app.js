@@ -7,7 +7,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
-var mysql = require('mysql');
 
 var port = process.env.PORT || 3000;
 var app = express();
@@ -22,25 +21,6 @@ app.locals.appdata = require('./data.json');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
-//Connect Database ===================================
-
-var db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    port: '3306',
-    password: '12345',
-    database: 'quiz'
-});
-
-db.connect(function(err) {
-    if(err) {
-        console.log('Error connecting to database.');
-        throw err;
-    } else {
-        console.log('Connected to database: ' + db.config.database);
-    }
-});
 
 //Initialize Modules =================================
 

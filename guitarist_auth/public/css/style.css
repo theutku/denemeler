@@ -452,3 +452,31 @@ header .navigation ul.nav li:hover a {
     bottom: 0;
     color: cornflowerblue;
   }
+
+  .userinfo {
+    color: #d69a08;
+    border: 2px solid green;
+    text-align: right;
+    float: right;
+    background: #124b5e;
+    padding: 1%;
+    margin-top: 1%; 
+    font-family: Bree Serif, serif;
+    border-radius: 5px;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+  }
+
+.userinfo:hover {
+  background: #bd3613;
+  cursor: pointer;
+}
+.userinfo:hover p {
+  color: #f8c64c;
+}
+
+.username {
+  color: floralwhite;
+}
