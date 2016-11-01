@@ -24,6 +24,8 @@ db.connect(function(err) {
 
 var listAll = 'SELECT * from guitarist';
 var insertItem = 'INSERT INTO guitarist(name, username, email, password, date) VALUE(?, ?, ?, ?, ?)';
+var deleteItem = 'DELETE from guitarist where id=?';
+var getItem = 'SELECT * from guitarist WHERE username = ?';
 
 db.query(listAll, function(err, results) {
     if(err) {
@@ -44,9 +46,9 @@ var Sql = module.exports;
 
 Sql.sqlInsert = function(name, username, email, password, date) {
 
-    bcrypt.genSalt(10, function (err, salt) {
-        bcrypt.hash(password, salt, function (err, hash) {
-            password = hash;
+    // bcrypt.genSalt(10, function (err, salt) {
+    //     bcrypt.hash(password, salt, function (err, hash) {
+    //         password = hash;
 
             db.query(insertItem, [name, username, email, password, date], function (err) {
                 if (err) {
@@ -55,10 +57,33 @@ Sql.sqlInsert = function(name, username, email, password, date) {
                 } else {
                     console.log('Database save succesful');
                 }
-            })
-        });
-    });
+            });
+    //     });
+    // });
 
 };
+
+Sql.findUserByUsername(function(username) {
+    db.query(getItem, id, function(err, rows) {
+        if (err) {
+            res.sendStatus(err.status || 500);
+            console.log('Database find error.');
+        } else {
+            console.log('User found successfully.');
+            return rows[0].id;
+        }
+    });
+});
+
+Sql.deleteUser = function(id) {
+    db.query(deleteItem, id, function() {
+        if (err) {
+            res.sendStatus(500);
+            console.log('Database delete error');
+        } else {
+            console.log('User successfully removed.');
+        }
+    })
+}
 
 
