@@ -137,17 +137,35 @@ router.post('/users/register', function(req, res) {
         };
 
         Sql.sqlCreate(newUser);
-        res.redirect('/home');
+        req.flash('successMsg', 'Registration successful. Login to continue.')
+        res.redirect('/users/login');
     }
+});
+
+//GET Profile ==================================
+
+router.get('/users/profile', isLoggedIn, function(req, res) {
+  res.render('profile', {
+    title: 'Profile'
+  })
+});
+
+//DELETE User ==================================
+
+router.post('/users/delete', isLoggedIn, function(req, res) {
+  Sql.deleteUser(req.user.id);
+  req.flash('logoutMsg', 'Your account has been deleted.');
+  res.redirect('/');
+  req.logout();
 });
 
 //LOGOUT =======================================
 
-router.get('/logout', function(req, res) {
+router.get('/logout', isLoggedIn, function(req, res) {
   req.logout();
   req.flash('logoutMsg', 'Logout successful.');
   res.redirect('/');
-})
+});
 
 //Authentication Check =========================
 

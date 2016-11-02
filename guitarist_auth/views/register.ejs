@@ -18,7 +18,9 @@
                 <div class="alert alert-danger"><%= item.msg %></div>
               <% }); %>
           <% } %>
-          
+          <% if(errorMsg.length) { %>
+                <div class="alert alert-danger"><%= errorMsg %></div>
+          <% } %>
           <form action="/users/register" method="post">
           <div class="form-group">
               <label>Name</label>

@@ -71,6 +71,7 @@ app.use(expressValidator({
 app.use(function(req, res, next) {
     res.locals.logoutMsg = req.flash('logoutMsg');
     res.locals.errorMsg = req.flash('errorMsg');
+    res.locals.successMsg = req.flash('successMsg');
     res.locals.user = req.user || null;
     next();
 })

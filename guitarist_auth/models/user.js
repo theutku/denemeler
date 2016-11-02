@@ -27,6 +27,7 @@ var listAll = 'SELECT * from guitarist';
 var insertItem = 'INSERT INTO guitarist(name, username, email, password, date) VALUE(?, ?, ?, ?, ?)';
 var getItem = 'SELECT * from guitarist WHERE username = ?';
 var getById = 'SELECT * from guitarist where id = ?'
+var deleteItem = 'DELETE from guitarist WHERE id = ?';
 
 db.query(listAll, function(err, results) {
     if(err) {
@@ -46,7 +47,7 @@ var User = module.exports;
 //Save New User with Hash ============================================================
 
 User.sqlCreate = function(newUser) {
-
+    
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(newUser.password, salt, function (err, hash) {
             newUser.password = hash;
@@ -69,6 +70,9 @@ User.findIdByUsername = function(username) {
         if (err) {
             res.sendStatus(err.status || 500);
             console.log('Database find error.');
+        }
+        if(rows.length == 0) {
+            console.log('No such user found.');
         } else {
             console.log('User found successfully.');
             return rows[0].id;
@@ -86,6 +90,17 @@ User.findUserById = function(id) {
             return rows[0];
         }        
     });
+}
+
+User.deleteUser = function(userid) {
+        db.query(deleteItem, userid, function(err) {
+            if(err){
+                console.log('Error updating database.');
+            }else {
+                console.log('User deleted.');
+            }
+        });
+    
 }
 
 User.passConfig = function(passport) {

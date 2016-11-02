@@ -5,8 +5,10 @@
             <% if(!user) { %>
                 <li role="presentation" id="login"><a href="/users/login">Login</a></li>
                 <li role="presentation" id="register"><a href="/users/register">Register</a></li>
-            <% }else { %>
-              <li role="presentation"><a href="/users/logout">Logout</a></li>
+            <% }else { %>         
+              <li role="presentation" id="profile"><a href="/users/profile">Profile</a></li>
+              <li role="presentation" id="guitaristPage"><a href="/home">Guitarists</a></li>
+              <li role="presentation"><a href="/logout">Logout</a></li>
             <% } %>
             
           </ul>

@@ -20,5 +20,16 @@ $(document).ready(function () {
     if(href == '/users/register') {
         $('#register').addClass('active');
     }
+    if(href == '/users/profile') {
+        $('#profile').addClass('active');
+    }
 });
 
+function checkUser() {
+    var sure = confirm('Are you sure?');
+    if(sure) {
+        return true;
+    } else {
+        return false;
+    }
+}

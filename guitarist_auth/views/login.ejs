@@ -15,6 +15,9 @@
           <% if(errorMsg.length != 0) { %>
               <div class="alert alert-danger"><%= errorMsg %></div>
           <% } %>
+          <% if(successMsg.length != 0) { %>
+              <div class="alert alert-success"><%= successMsg %></div>
+          <% } %>
           <form action="/users/login" method="post">
           <div class="form-group">
               <label>Username</label>
