@@ -21,3 +21,4 @@ $(document).ready(function () {
         $('#register').addClass('active');
     }
 });
+

@@ -7,15 +7,19 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
+var passport = require('passport');
+var flash = require('connect-flash');
 
 var port = process.env.PORT || 3000;
 var app = express();
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-//var User = require('./models/user');
 
 app.locals.appdata = require('./data.json');
+
+//Passport ===========================================
+
+
 
 //Set View Engine ====================================
 
@@ -24,6 +28,11 @@ app.set('view engine', 'ejs');
 
 //Initialize Modules =================================
 
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
@@ -31,13 +40,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(cookieParser());
+app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
+
+var userPass = require('./models/user')
+userPass.passConfig(passport);
 
 //Validator ==========================================
 
@@ -58,10 +66,18 @@ app.use(expressValidator({
   }
 }));
 
+//Global Flash Variables ============================
+
+app.use(function(req, res, next) {
+    res.locals.logoutMsg = req.flash('logoutMsg');
+    res.locals.errorMsg = req.flash('errorMsg');
+    res.locals.user = req.user || null;
+    next();
+})
+
 //Routes ====================================
 
 app.use('/', routes);
-app.use('/users', users);
 
 // catch 404 and forwarding to error handler
 

@@ -453,7 +453,7 @@ header .navigation ul.nav li:hover a {
     color: cornflowerblue;
   }
 
-  .userinfo {
+  .userinfo a {
     color: #d69a08;
     border: 2px solid green;
     text-align: right;
@@ -467,6 +467,7 @@ header .navigation ul.nav li:hover a {
     -moz-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
+    text-decoration: none;
   }
 
 .userinfo:hover {
