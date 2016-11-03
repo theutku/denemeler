@@ -26,8 +26,9 @@ db.connect(function(err) {
 var listAll = 'SELECT * from guitarist';
 var insertItem = 'INSERT INTO guitarist(name, username, email, password, date) VALUE(?, ?, ?, ?, ?)';
 var getItem = 'SELECT * from guitarist WHERE username = ?';
-var getById = 'SELECT * from guitarist where id = ?'
+var getById = 'SELECT * from guitarist where id = ?';
 var deleteItem = 'DELETE from guitarist WHERE id = ?';
+var getEmail = 'SELECT * from guitarist where email = ?'
 
 db.query(listAll, function(err, results) {
     if(err) {
@@ -48,20 +49,42 @@ var User = module.exports;
 
 User.sqlCreate = function(newUser, callback) {
     
-    bcrypt.genSalt(10, function (err, salt) {
-        bcrypt.hash(newUser.password, salt, function (err, hash) {
-            newUser.password = hash;
+    //User Creation Function ===========================================
+    var createUser = function() {
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(newUser.password, salt, function (err, hash) {
+                newUser.password = hash;
 
-            db.query(insertItem, [newUser.name, newUser.username, newUser.email, newUser.password, newUser.date], function (err) {
-                if (err) {
-                    console.log('Database write error');
-                    callback(err);
-                } else {
-                    console.log('Database save succesful');
-                    callback(null);
-                }
+                db.query(insertItem, [newUser.name, newUser.username, newUser.email, newUser.password, newUser.date], function (err) {
+                    if (err) {
+                        console.log('Database write error');
+                        callback(err, false, false);
+                    } else {
+                        console.log('Database save succesful');
+                        callback(null, false, false);
+                    }
+                });
             });
         });
+    }
+
+    //Check if username exists ================================
+    db.query(getItem, newUser.username, function(err, users) {
+        if(users.length) {
+            console.log('Username already exists.');
+            callback(null, true, false);
+        } else {
+
+            //Check if e-mail address exists ================================    
+            db.query(getEmail, newUser.email, function(err, rows) {
+                if(rows.length) {
+                    console.log('Email already exists.');
+                    callback(null, false, true);
+                } else {
+                    createUser();
+                }
+            });
+        }
     });
 
 };
@@ -129,8 +152,8 @@ User.passConfig = function(passport) {
             
             if(!rows.length) {
                 return done(null, false, req.flash('errorMsg', 'User not found.'));
-            } 
-
+            }
+            
             bcrypt.compare(password, rows[0].password, function(err, match) {
                 if(err) {
                     return done(err);

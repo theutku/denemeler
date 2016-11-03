@@ -136,8 +136,15 @@ router.post('/users/register', isNotLoggedIn, function(req, res) {
           date: date
         };
 
-        Sql.sqlCreate(newUser, function(err) {
-          if(err) {
+        //Check Database and Create User =========================================
+        Sql.sqlCreate(newUser, function(err, usernameExist, emailExist) {
+          if(usernameExist) {
+            req.flash('errorMsg', 'Username already taken.');
+            res.redirect('/users/register');
+          } else if(emailExist) {
+            req.flash('errorMsg', 'E-mail address already taken.');
+            res.redirect('/users/register');
+          } else if(err) {
             req.flash('errorMsg', 'Error creating user.');
             res.redirect('/users/register');
             console.log(err);      
