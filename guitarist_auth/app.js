@@ -17,10 +17,6 @@ var routes = require('./routes/index');
 
 app.locals.appdata = require('./data.json');
 
-//Passport ===========================================
-
-
-
 //Set View Engine ====================================
 
 app.set('views', __dirname + '/views');
@@ -43,6 +39,8 @@ app.use(passport.session());
 app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
+
+//Passport ===========================================
 
 var userPass = require('./models/user')
 userPass.passConfig(passport);

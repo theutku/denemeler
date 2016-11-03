@@ -7,7 +7,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3400',
+    port: '3306',
     password: '12345',
     database: 'quiz'
 });
@@ -46,7 +46,7 @@ var User = module.exports;
 
 //Save New User with Hash ============================================================
 
-User.sqlCreate = function(newUser) {
+User.sqlCreate = function(newUser, callback) {
     
     bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(newUser.password, salt, function (err, hash) {
@@ -54,10 +54,11 @@ User.sqlCreate = function(newUser) {
 
             db.query(insertItem, [newUser.name, newUser.username, newUser.email, newUser.password, newUser.date], function (err) {
                 if (err) {
-                    res.sendStatus(500);
                     console.log('Database write error');
+                    callback(err);
                 } else {
                     console.log('Database save succesful');
+                    callback(null);
                 }
             });
         });

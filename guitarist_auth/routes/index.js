@@ -78,7 +78,7 @@ router.get('/guitarists/:guitaristid', isLoggedIn, function (req, res) {
 
 //GET Login Page ============================
 
-router.get('/users/login', function(req, res) {
+router.get('/users/login',isNotLoggedIn, function(req, res) {
     res.render('login', {
         title: 'Login'
     });
@@ -86,7 +86,7 @@ router.get('/users/login', function(req, res) {
 
 //POST Login Page ===========================
 
-router.post('/users/login', passport.authenticate('local-login', {
+router.post('/users/login', isNotLoggedIn, passport.authenticate('local-login', {
   successRedirect: '/home',
   failureRedirect: '/users/login',
   failureFlash: false
@@ -94,7 +94,7 @@ router.post('/users/login', passport.authenticate('local-login', {
 
 //GET Register Page =========================
 
-router.get('/users/register', function(req, res) {
+router.get('/users/register', isNotLoggedIn, function(req, res) {
     res.render('register', {
         title: 'Register',
         errors: []
@@ -103,7 +103,7 @@ router.get('/users/register', function(req, res) {
 
 //POST Register Page ========================
 
-router.post('/users/register', function(req, res) {
+router.post('/users/register', isNotLoggedIn, function(req, res) {
     var name = req.body.name;
     var username = req.body.username;
     var email = req.body.email;
@@ -136,9 +136,17 @@ router.post('/users/register', function(req, res) {
           date: date
         };
 
-        Sql.sqlCreate(newUser);
-        req.flash('successMsg', 'Registration successful. Login to continue.')
-        res.redirect('/users/login');
+        Sql.sqlCreate(newUser, function(err) {
+          if(err) {
+            req.flash('errorMsg', 'Error creating user.');
+            res.redirect('/users/register');
+            console.log(err);      
+          } else {
+            req.flash('successMsg', 'Registration successful. Login to continue.')
+            res.redirect('/users/login');
+          }
+        });
+        
     }
 });
 
@@ -175,6 +183,15 @@ function isLoggedIn(req, res, next) {
   } else {
     req.flash('errorMsg', 'Login is required to visit the page.');
     res.redirect('/users/login');
+  }
+}
+
+function isNotLoggedIn(req, res, next) {
+  if(req.isAuthenticated()) {
+    req.flash('logoutMsg', 'You are already logged in.')
+    res.redirect('/');
+  } else {
+    return next();
   }
 }
 
