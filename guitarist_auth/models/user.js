@@ -131,11 +131,11 @@ User.passConfig = function(passport) {
                 return done(null, false, req.flash('errorMsg', 'User not found.'));
             } 
 
-            bcrypt.compare(password, rows[0].password, function(err, res) {
+            bcrypt.compare(password, rows[0].password, function(err, match) {
                 if(err) {
                     return done(err);
                 } 
-                if(!res) {
+                if(!match) {
                     return done(null, false, req.flash('errorMsg', 'Invalid Password.'));
                 } else {
                     return done(null, rows[0]);

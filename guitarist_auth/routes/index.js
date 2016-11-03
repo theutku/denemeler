@@ -188,7 +188,7 @@ function isLoggedIn(req, res, next) {
 
 function isNotLoggedIn(req, res, next) {
   if(req.isAuthenticated()) {
-    req.flash('logoutMsg', 'You are already logged in.')
+    req.flash('logoutMsg', 'You are already logged in. Logout to continue.')
     res.redirect('/');
   } else {
     return next();
