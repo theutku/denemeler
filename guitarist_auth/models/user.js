@@ -69,15 +69,15 @@ User.sqlCreate = function(newUser, callback) {
     }
 
     //Check if username exists ================================
-    db.query(getItem, newUser.username, function(err, users) {
-        if(users.length) {
+    db.query(getItem, newUser.username, function(err, usernames) {
+        if(usernames.length) {
             console.log('Username already exists.');
             callback(null, true, false);
         } else {
 
             //Check if e-mail address exists ================================    
-            db.query(getEmail, newUser.email, function(err, rows) {
-                if(rows.length) {
+            db.query(getEmail, newUser.email, function(err, emails) {
+                if(emails.length) {
                     console.log('Email already exists.');
                     callback(null, false, true);
                 } else {
@@ -126,6 +126,8 @@ User.deleteUser = function(userid) {
         });
     
 }
+
+//Passport Configuration =====================================
 
 User.passConfig = function(passport) {
 

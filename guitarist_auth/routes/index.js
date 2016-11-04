@@ -89,7 +89,7 @@ router.get('/users/login',isNotLoggedIn, function(req, res) {
 router.post('/users/login', isNotLoggedIn, passport.authenticate('local-login', {
   successRedirect: '/home',
   failureRedirect: '/users/login',
-  failureFlash: false
+  failureFlash: true
 }));
 
 //GET Register Page =========================
