@@ -116,12 +116,14 @@ User.findUserById = function(id) {
     });
 }
 
-User.deleteUser = function(userid) {
+User.deleteUser = function(userid, cb) {
         db.query(deleteItem, userid, function(err) {
             if(err){
                 console.log('Error updating database.');
+                cb(err, true) 
             }else {
                 console.log('User deleted.');
+                cb(null, false);
             }
         });
     

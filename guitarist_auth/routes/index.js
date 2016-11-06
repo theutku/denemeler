@@ -168,10 +168,18 @@ router.get('/users/profile', isLoggedIn, function(req, res) {
 //DELETE User ==================================
 
 router.post('/users/delete', isLoggedIn, function(req, res) {
-  Sql.deleteUser(req.user.id);
-  req.flash('logoutMsg', 'Your account has been deleted.');
-  res.redirect('/');
-  req.logout();
+  Sql.deleteUser(req.user.id, function(err, dbErr) {
+    if(dbErr) {
+      console.log(err);
+      req.flash('errorMsg', 'Error deleting user.');
+      res.redirect('/users/profile');
+    } else {
+      req.flash('logoutMsg', 'Your account has been deleted.');
+      res.redirect('/');
+      req.logout();
+    }
+    
+  });
 });
 
 //LOGOUT =======================================
