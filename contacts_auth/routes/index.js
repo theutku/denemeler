@@ -16,7 +16,7 @@ router.get('/', function(req, res) {
 
 // GET Register Page ===========================================
 
-router.get('/users/register' function(req, res) {
+router.get('/users/register', function(req, res) {
     res.render('register', {
         title: 'Register'
     });
@@ -29,3 +29,25 @@ router.get('/users/login', function(req, res) {
         title: 'Login'
     });
 });
+
+// GET Contacts Page ===========================================
+
+router.get('/users/contacts', function(req, res) {
+    res.render('contacts', {
+        title: 'Contacts'
+    });
+});
+
+// POST Login Page =============================================
+
+router.post('users/login', passport.authenticate('local-login', {
+    successRedirect: '/users/contacts',
+    failureRedirect: '/users/login',
+    failureFlash: true
+}));
+
+// POST Register Page ==========================================
+
+module.exports = router;
+
+

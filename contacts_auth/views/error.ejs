@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <% include ./partials/head.ejs %>
+  </head>
+
+  <body>
+
+    <div class="container">
+
+            <% include ./partials/header.ejs %>
+
+      <div class="jumbotron">
+        <h1>Oops! Something went wrong!</h1>
+        <p><%= error.status %></p>
+        <p><%= message %></p>
+        <p>
+          <a class="btn btn-lg btn-primary" href="/" role="button">Home &raquo;</a>
+        </p>
+      </div>
+
+    <% include ./partials/footer.ejs %>
+
+    </div> <!-- /container -->
+    
+
+    <% include ./partials/jsdefaults.ejs %>
+  </body>
+</html>

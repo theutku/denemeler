@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    var href = window.location.pathname
+    var href = window.location.pathname;
 
     if(href == '/') {
         $('#home').addClass('active');
