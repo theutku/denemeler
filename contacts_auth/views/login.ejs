@@ -12,6 +12,9 @@
 
       <div class="jumbotron" id="loginPart">
         <h1>Login</h1>
+        <% if(successMsg.length != 0) { %>
+              <div class="alert alert-success"><%= successMsg %></div>
+        <% } %>
         <form class="form-signin" method="POST">
         <h4 class="form-signin-heading">Login to Your Account</h4>
         <label for="inputEmail" class="sr-only">Username</label>

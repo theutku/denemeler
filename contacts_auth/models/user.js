@@ -9,7 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3306',
+    port: '3400',
     password: '12345',
     database: 'quiz'
 });
@@ -29,12 +29,65 @@ var userModel = module.exports
 
 //Database Query Variables ============================================
 
-var findByUsername = 'SELECT * from contactsUser where username = ?';
-var findById = 'SELECT * from contactsUser where id = ?';
-var insertItem = 'INSERT INTO contactsUser(username, email) VALUE(?, ?)';
-var deleteItem = 'DELETE from contactsUser where id = ?';
+var findByUsername = 'SELECT * from contactsuser where username = ?';
+var findById = 'SELECT * from contactsuser where id = ?';
+var findByEmail = 'SELECT * from contactsuser where email = ?';
+var insertItem = 'INSERT INTO contactsuser(username, email, password, date) VALUE(?, ?, ?, ?)';
+var deleteItem = 'DELETE from contactsuser where id = ?';
 
 //USER MODEL ==========================================================
+//Save New User =======================================================
+
+userModel.createUser = function(newUser, callback) {
+
+    //User Creation Function ==========================================
+    var createNewUser = function() {
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(newUser.password, salt, function (err, hash) {
+                newUser.password = hash;
+
+                db.query(insertItem, [newUser.username, newUser.email, newUser.password, newUser.date], function (err) {
+                    if (err) {
+                        console.log('Database write error.');
+                        callback(err, false, false);
+                    } else {
+                        console.log('User successfully created.');
+                        callback(null, false, false);
+                    }
+                });
+            });
+        });
+    }
+
+    //Check If Username Exists ==========================================================
+    db.query(findByUsername, newUser.username, function(err, userResult) {
+        if(err) {
+            console.log('Error checking existing usernames for new user creation.');
+            callback(err, false, false);
+        } else if(userResult.length) {
+            console.log('Username already taken.');
+            callback(null, true, false);
+        } else {
+
+            //Check If Email Exists =====================================================
+            db.query(findByEmail, newUser.email, function(error, emailResult) {
+                if(err) {
+                    console.log('Error checking existing emails for new user creation.');
+                    callback(error, false, false);
+                }
+                if(emailResult.length) {
+                    console.log('E - mail already taken.');
+                    callback(null, false, true);
+                } else {
+                    createNewUser();
+                }
+            });
+
+        }
+    });
+}
+
+
 //Passport ============================================================
 
 userModel.passConfig = function(passport) {

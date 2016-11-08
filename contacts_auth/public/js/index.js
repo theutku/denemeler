@@ -1,3 +1,5 @@
+//Active Tabs ===========================================
+
 $(document).ready(function() {
 
     var href = window.location.pathname;
@@ -19,3 +21,19 @@ $(document).ready(function() {
     }
 });
 
+//Message Slide ========================================
+
+$(document).ready(function() {
+    $('.alert-danger').slideToggle('slow');
+    $('.alert-success').slideToggle('slow');    
+});
+
+//Check User Approval for Deletion =====================
+function checkUser() {
+    var sure = confirm('Are you sure?');
+    if(sure) {
+        return true;
+    } else {
+        return false;
+    }
+}

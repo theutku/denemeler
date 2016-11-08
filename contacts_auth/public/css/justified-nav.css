@@ -96,3 +96,21 @@ body {
 #loginPart {
   text-align: center;
 }
+
+.form-group {
+  width: 40%;
+  vertical-align: middle;
+  margin: 0 auto;
+  text-align: left;
+  margin-top: 2%;
+}
+
+.alert-success, .alert-danger {
+  display:none;
+  width: 40%;
+  vertical-align: middle;
+  margin: 0 auto;
+  margin-top: 2%;
+  padding: 3px;
+  margin-bottom: 2%;
+}
