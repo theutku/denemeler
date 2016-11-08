@@ -9,7 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3400',
+    port: '3306',
     password: '12345',
     database: 'quiz'
 });
@@ -137,7 +137,7 @@ userModel.passConfig = function(passport) {
                     return done(null, false, req.flash('errorMsg', 'Invalid password.'));
                 } else {
                     console.log('Bcrypt: Passwords match.');
-                    return done(null, result[0]);
+                    return done(null, result[0], req.flash('successMsg', 'Login successful.'));
                 }
             });
         });

@@ -25,6 +25,14 @@ router.get('/users/register', function(req, res) {
     });
 });
 
+// GET Account Page ============================================
+
+router.get('/users/account', function(req, res) {
+    res.render('account', {
+        title: 'Account',
+    });
+});
+
 // GET Login Page ==============================================
 
 router.get('/users/login', function(req, res) {
@@ -46,10 +54,11 @@ router.get('/users/contacts', function(req, res) {
 router.post('users/login', passport.authenticate('local-login', {
     successRedirect: '/users/contacts',
     failureRedirect: '/users/login',
-    failureFlash: true
+    failureFlash: false
 }));
 
 // POST Register Page ==========================================
+
 router.post('/users/register', function(req, res) {
     var username = req.body.username;
     var email = req.body.email;
@@ -76,6 +85,7 @@ router.post('/users/register', function(req, res) {
 
         var newUser = {
             username: username,
+            email: email,
             password: password,
             date: dateNow
         }
