@@ -45,10 +45,30 @@ router.get('/users/login', isNotLoggedIn, function(req, res) {
 // GET Contacts Page ===========================================
 
 router.get('/users/contacts', isLoggedIn, function(req, res) {
-    res.render('contacts', {
-        title: 'Contacts',
-        errors: []
+    contactModel.listContacts(req.user.id, function(err, contactExist, results) {
+        if(err) {
+            req.flash('errorMsg', 'Error listing contacts.');
+            res.render('contacts', {
+                title: 'Error',
+                contacts: [],
+                errors: []
+            });
+        } else if(!contactExist) {
+            req.flash('successMsg', 'No contacts found.');
+            res.render('contacts', {
+                title: 'Contacts',
+                contacts: [],
+                errors: []
+            });
+        } else {
+            res.render('contacts', {
+            title: 'Contacts',
+            errors: [],
+            contacts: results
+            });
+        }
     });
+
 });
 
 // POST Login Page =============================================
@@ -158,7 +178,7 @@ router.post('/users/newcontact', isLoggedIn, function(req, res) {
     } else {
 
         var newContact = {
-            userid: req.user.id,
+            belongId: req.user.id,
             contname: contName,
             contemail: contEmail,
             contphone: contPhone
