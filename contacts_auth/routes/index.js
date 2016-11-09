@@ -5,6 +5,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var userModel = require('../models/user');
+var contactModel = require('../models/contact');
 
 var router = express.Router();
 
@@ -18,7 +19,7 @@ router.get('/', function(req, res) {
 
 // GET Register Page ===========================================
 
-router.get('/users/register', function(req, res) {
+router.get('/users/register', isNotLoggedIn, function(req, res) {
     res.render('register', {
         title: 'Register',
         errors: []
@@ -27,7 +28,7 @@ router.get('/users/register', function(req, res) {
 
 // GET Account Page ============================================
 
-router.get('/users/account', function(req, res) {
+router.get('/users/account', isLoggedIn, function(req, res) {
     res.render('account', {
         title: 'Account',
     });
@@ -35,7 +36,7 @@ router.get('/users/account', function(req, res) {
 
 // GET Login Page ==============================================
 
-router.get('/users/login', function(req, res) {
+router.get('/users/login', isNotLoggedIn, function(req, res) {
     res.render('login', {
         title: 'Login'
     });
@@ -43,23 +44,32 @@ router.get('/users/login', function(req, res) {
 
 // GET Contacts Page ===========================================
 
-router.get('/users/contacts', function(req, res) {
+router.get('/users/contacts', isLoggedIn, function(req, res) {
     res.render('contacts', {
-        title: 'Contacts'
+        title: 'Contacts',
+        errors: []
     });
 });
 
 // POST Login Page =============================================
 
-router.post('users/login', passport.authenticate('local-login', {
+router.post('/users/login', passport.authenticate('local-login', {
     successRedirect: '/users/contacts',
     failureRedirect: '/users/login',
-    failureFlash: false
+    failureFlash: true
 }));
+
+// GET Logout ==================================================
+
+router.get('/users/logout', isLoggedIn, function(req, res) {
+    req.logout();
+    req.flash('successMsg', 'Logout successful.');
+    res.redirect('/users/login');
+});
 
 // POST Register Page ==========================================
 
-router.post('/users/register', function(req, res) {
+router.post('/users/register', isNotLoggedIn, function(req, res) {
     var username = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
@@ -109,6 +119,85 @@ router.post('/users/register', function(req, res) {
     }
 });
 
+//DELETE User Account ==========================================
+
+router.post('/users/delete', isLoggedIn, function(req, res) {
+    userModel.deleteUser(req.user, function(err) {
+        if(err) {
+            req.flash('errorMsg', 'Error deleting account.');
+            res.redirect('/users/login');
+        } else {
+            req.logout();
+            req.flash('successMsg', 'Account has been deleted.');
+            res.redirect('/users/login');
+        }
+    })
+})
+
+// POST New Contact ============================================
+
+router.post('/users/newcontact', isLoggedIn, function(req, res) {
+
+    var contName = req.body.contName;
+    var contEmail = req.body.contEmail;
+    var contPhone = req.body.contPhone;
+
+    req.checkBody('contName', 'Contact Name cannot be empty.').notEmpty();
+    req.checkBody('contEmail', 'Contact Email cannot be empty.').notEmpty();
+    req.checkBody('contEmail', 'Contact Email is not valid.').isEmail();
+    req.checkBody('contPhone', 'Contact Phone Number cannot be empty.').notEmpty();
+
+    var contactErrors = req.validationErrors();
+
+    if(contactErrors) {
+        console.log('New user form is not fulfilled.');
+        res.render('contacts', {
+            title: 'Error',
+            errors: contactErrors
+        });
+    } else {
+
+        var newContact = {
+            userid: req.user.id,
+            contname: contName,
+            contemail: contEmail,
+            contphone: contPhone
+        }
+
+        contactModel.addContact(newContact, function(err) {
+            if(err) {
+                console.log('Error creating new contact.');
+                req.flash('errorMsg', 'Error creating new contact.');
+                res.redirect('/users/contacts');
+            } else {
+                req.flash('successMsg', 'New contact created.');
+                res.redirect('/users/contacts');
+            }
+        })
+    }
+
+});
+
+
+//Check Authorization for Page Navigation ======================
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    } else {
+        req.flash('errorMsg', 'Login required to continue.')
+        res.redirect('/users/login');
+    }
+}
+
+function isNotLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        req.flash('errorMsg', 'You are already logged in.');
+        res.redirect('/users/contacts');
+    } else {
+        return next();
+    }
+}
 
 //Export Module ================================================
 

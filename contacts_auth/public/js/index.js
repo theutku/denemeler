@@ -29,6 +29,7 @@ $(document).ready(function() {
 });
 
 //Check User Approval for Deletion =====================
+
 function checkUser() {
     var sure = confirm('Are you sure?');
     if(sure) {
@@ -36,4 +37,11 @@ function checkUser() {
     } else {
         return false;
     }
+}
+
+// Reveal New Contact Form =============================
+
+function revealForm() {
+    $('#newContForm').slideToggle('slow');
+    
 }

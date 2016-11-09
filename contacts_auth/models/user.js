@@ -9,7 +9,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3306',
+    port: '3400',
     password: '12345',
     database: 'quiz'
 });
@@ -27,7 +27,7 @@ db.connect(function(err) {
 
 var userModel = module.exports
 
-//Database Query Variables ============================================
+//Database User Query Variables =======================================
 
 var findByUsername = 'SELECT * from contactsuser where username = ?';
 var findById = 'SELECT * from contactsuser where id = ?';
@@ -71,7 +71,7 @@ userModel.createUser = function(newUser, callback) {
 
             //Check If Email Exists =====================================================
             db.query(findByEmail, newUser.email, function(error, emailResult) {
-                if(err) {
+                if(error) {
                     console.log('Error checking existing emails for new user creation.');
                     callback(error, false, false);
                 }
@@ -87,6 +87,19 @@ userModel.createUser = function(newUser, callback) {
     });
 }
 
+// Delete User Account ================================================
+
+userModel.deleteUser = function(user, callback) {
+    db.query(deleteItem, user.id, function(err) {
+        if(err) {
+            console.log('Error deleting user.');
+            callback(err);
+        } else {
+            console.log('User successfully deleted.');
+            callback(null);
+        }
+    })
+}
 
 //Passport ============================================================
 
@@ -94,23 +107,14 @@ userModel.passConfig = function(passport) {
 
     //Serialize User ==================================================
     passport.serializeUser(function(user, done) {
+        console.log('User serialized.');
         return done(null, user.id);
     })
 
     //Deserialize User ================================================
     passport.deserializeUser(function(id, done) {
         db.query(findById, id, function(err, result) {
-            if(err) {
-                console.log('Error searching database for deserialization.');
-                return done(err);
-            } 
-            if(result.length) {
-                console.log('User deserialized.');
-                return done(null, result[0]);
-            } else {
-                console.log('Error deserializing. User not found.');
-                return done(null, false);
-            }
+            return done(null, result[0]);
         });
     });
     

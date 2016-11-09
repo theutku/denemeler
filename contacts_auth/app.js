@@ -28,9 +28,12 @@ app.use(cookieParser());
 
 app.use(session({
     secret: 'keyboard cat',
-    saveUninitialized: true,
-    resave: true
+    resave: true,
+    saveUninitialized: true
+    
 }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
@@ -75,11 +78,11 @@ app.use('/', routes);
 
 // catch 404 and forwarding to error handler ===================
 
-app.use(function(req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-});
+// app.use(function(req, res, next) {
+//     var err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
 // development error handler ===================================
 

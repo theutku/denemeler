@@ -9,18 +9,20 @@
     <div class="container">
 
       <% include ./partials/header.ejs %>
-
-      <div class="jumbotron">
+      <div class="col-lg-12" id="accountCont">
+        <div class="jumbotron" id="account">
         <% if(successMsg.length != 0) { %>
               <div class="alert alert-success"><%= successMsg %></div>
         <% } %>
           <h1><i class="fa fa-user-circle-o"></i> <%= user.username %></h1>
           <p class="lead"><i class="fa fa-envelope-open"></i> <%= user.email %></p>
           <form onsubmit="return checkUser()" action="/users/delete" method="POST">
-            <p><input type="submit" class="btn btn-lg btn-danger" value="Delete Profile"></p>
+            <p><input type="submit" class="btn btn-lg btn-danger" value="Delete Account"></p>
           </form>
 
       </div>
+      </div>
+      
 
       <% include ./partials/footer.ejs %>
       

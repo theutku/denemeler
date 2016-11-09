@@ -12,22 +12,27 @@
 
       <div class="jumbotron" id="loginPart">
         <h1>Login</h1>
-        <% if(errorMsg.length != 0) { %>
-              <div class="alert alert-success"><%= errorMsg %></div>
+        <% if(errorMsg.length) { %>
+              <div class="alert alert-danger"><%= errorMsg %></div>
         <% } %>
-        <form class="form-signin" method="POST">
-        <h4 class="form-signin-heading">Login to Your Account</h4>
-        <label for="inputEmail" class="sr-only">Username</label>
-        <input type="text" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
+        <% if(successMsg.length) { %>
+              <div class="alert alert-success"><%= successMsg %></div>
+        <% } %>
+        <form class="form-signin" method="post" action="/users/login">
+          <h4 class="form-signin-heading">Login to Your Account</h4>
+        <div class="input-group margin-bottom-sm">
+          <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
+          <input class="form-control" type="text" placeholder="Username" name="username">
         </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-key fa-fw" aria-hidden="true"></i></span>
+          <input class="form-control" type="password" placeholder="Password" name="password">
+        </div>
+        <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-      </form>
+        </form>
+        
       </div>
 
       
