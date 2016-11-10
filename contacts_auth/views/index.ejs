@@ -17,11 +17,16 @@
         <p>You can easily save, manage and view your contacts in a simple and secure environment.</p>
 
         <% if(!user) { %>
-           <p>Register now!</p>
+          <p>Register now!</p>
           <p>
           <a class="btn btn-lg btn-primary" href="/users/register" role="button">Register Now &raquo;</a>
           </p>   
-        <% } %>
+        <% } else { %>
+          <p>Start Now!</p>
+          <p>
+          <a class="btn btn-lg btn-primary" href="/users/contacts" role="button">Go to Contacts &raquo;</a>
+          </p>   
+        <% }%>
         
       </div>
 

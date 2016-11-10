@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3306',
+    port: '3400',
     password: '12345',
     database: 'quiz'
 });
@@ -31,7 +31,7 @@ contactModel.addContact = function(newContact, callback) {
     var date = new Date();
     newContact.date = date;    
 
-    // for(x in newContact) {
+    // for(var x in newContact) {
     //     if(newContact[x].length == 0) {
     //         hashes.push("NA");
     //     } else {
@@ -74,4 +74,14 @@ contactModel.listContacts = function(userId, callback) {
 }
 
 
-
+contactModel.deleteContact = function(contId, callback) {
+    db.query(deleteItem, contId, function(err) {
+        if(err) {
+            console.log('Error deleting contact.');
+            callback(err);
+        } else {
+            console.log('Contact deleted.');
+            callback(null);
+        }
+    });
+}

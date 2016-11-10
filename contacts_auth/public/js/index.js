@@ -42,6 +42,5 @@ function checkUser() {
 // Reveal New Contact Form =============================
 
 function revealForm() {
-    $('#newContForm').slideToggle('slow');
-    
+    $('#newContForm').slideToggle('slow'); 
 }

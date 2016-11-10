@@ -198,8 +198,24 @@ router.post('/users/newcontact', isLoggedIn, function(req, res) {
 
 });
 
+// DELETE Contact ===============================================
 
-//Check Authorization for Page Navigation ======================
+router.post('/users/deletecont/:id', function(req, res) {
+
+    var contactId = req.params.id;
+
+    contactModel.deleteContact(contactId, function(err) {
+        if(err) {
+            req.flash('errorMsg', 'Error deleting contact.');
+            res.redirect('/users/contacts');
+        } else {
+            req.flash('successMsg', 'Contact deleted.');
+            res.redirect('/users/contacts');
+        }
+    })
+});
+
+// Check Authorization for Page Navigation ======================
 
 function isLoggedIn(req, res, next) {
     if(req.isAuthenticated()) {
@@ -219,7 +235,7 @@ function isNotLoggedIn(req, res, next) {
     }
 }
 
-//Export Module ================================================
+// Export Module ================================================
 
 module.exports = router;
 

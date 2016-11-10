@@ -135,7 +135,6 @@ body {
   float: inherit;
   background-color: #eee;
   margin-top: 3em;
-  width: 20%;
   border-radius: 5px;
   padding: 1em 1em;
   text-align: center;
@@ -156,11 +155,20 @@ body {
   text-align: center;
 }
 
-/*body {
-  background-image: url("../img/addressbook.jpg")
+.eachCont {
+  display: inline-block;
+  width: 22%;
+  margin-left: 2%;
 }
 
-p, .text-muted {
-  color: wheat;
-}*/
+.eachCont h1 {
+  font-size: 1.5em;
+}
 
+.eachCont p {
+  font-size: 1em;
+}
+
+#contDisplay {
+  text-align: center;
+}
