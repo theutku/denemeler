@@ -73,6 +73,7 @@ contactModel.listContacts = function(userId, callback) {
     });
 }
 
+// DELETE Contact From Database ======================================
 
 contactModel.deleteContact = function(contId, callback) {
     db.query(deleteItem, contId, function(err) {
@@ -85,3 +86,6 @@ contactModel.deleteContact = function(contId, callback) {
         }
     });
 }
+
+// EDIT Contact in Database =========================================
+

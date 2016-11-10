@@ -212,7 +212,7 @@ router.post('/users/deletecont/:id', function(req, res) {
             req.flash('successMsg', 'Contact deleted.');
             res.redirect('/users/contacts');
         }
-    })
+    });
 });
 
 // Check Authorization for Page Navigation ======================

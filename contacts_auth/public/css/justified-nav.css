@@ -150,6 +150,12 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+#editContForm {
+  display: none;
+  padding-bottom: 2em;
+  border-bottom: 1px solid #eee;
+}
+
 #newContact {
   margin: 0 auto;
   text-align: center;
@@ -162,7 +168,8 @@ body {
 }
 
 .eachCont h1 {
-  font-size: 1.5em;
+  font-size: 1.7em;
+  margin-bottom: 1em;
 }
 
 .eachCont p {

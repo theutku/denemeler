@@ -44,6 +44,27 @@
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
         </form>
+
+        <form id="editContForm" class="form-signin" method="post" action="/users/newcontact">
+          <h4 class="form-signin-heading">Edit Contact</h4>
+        <div class="input-group margin-bottom-sm">
+          <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
+          <input class="form-control" type="text" placeholder="Name" name="contName">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+          <input class="form-control" type="email" placeholder="E - Mail" name="contEmail">
+        </div>
+        <br>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+          <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone">
+        </div>
+        <br>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+        </form>
+
         <section id="contDisplay">
           <% if(contacts.length) { %>
             <% contacts.forEach(function(item) { %>
@@ -55,9 +76,9 @@
                 <p class="lead"><i class="fa fa-phone"></i> <%= item.contphone %></p>
 
                 <form onsubmit="return checkUser()" action="/users/deletecont/<%= item.id %>" method="POST" >
-                  <p><input type="submit" class="btn btn-danger" value="Delete Contact"></p>
+                  <p><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> | Delete Contact</button></p>
                 </form>
-                
+                  <p><button onclick="return editContact()" id="editCont" type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> | Edit Contact</button></p>                
                 </div>
               </section>
             <% }); %>

@@ -42,5 +42,13 @@ function checkUser() {
 // Reveal New Contact Form =============================
 
 function revealForm() {
-    $('#newContForm').slideToggle('slow'); 
+    $('#newContForm').slideToggle('slow');
+    $('#editContForm').slideUp('slow'); 
+}
+
+//Edit Contact =========================================
+
+function editContact() {
+    $('#editContForm').slideToggle('slow');
+    $('#newContForm').slideUp('slow');
 }
