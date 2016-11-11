@@ -22,7 +22,7 @@ var findByUserId = 'SELECT * from contactslist where belongId = ?';
 var findByEmail = 'SELECT * from contactslist where contemail = ?';
 var insertItem = 'INSERT INTO contactslist(belongId, contname, contemail, contphone, updated, updateDate, contdate) VALUE(?, ?, ?, ?, ?, ?, ?)';
 var deleteItem = 'DELETE from contactslist where id = ?';
-var updateItem = 'UPDATE contactslist SET contname=?, contemail=?, contphone=?, updated = ?, updateDate=?, where id = ?';
+var updateItem = 'UPDATE contactslist SET contname=?, contemail=?, contphone=?, updated = ?, updateDate=? where id = ?';
 
 //Add New Contact to Database =========================================
 
@@ -69,6 +69,12 @@ contactModel.listContacts = function(userId, callback) {
            console.log('No contact records.');
            callback(null, false, null);
        } else {
+           for(var i=0; i<results.length; i++) {
+               if(results[i].updateDate.length) {
+                    var trimDate = results[i].updateDate.substring(0,16);
+                    results[i].updateDate =trimDate;                   
+               }
+           }
            console.log('Contacts successfully found.');
            callback(null, true, results);
        }
@@ -97,7 +103,7 @@ contactModel.editContact = function(editedContact, callback) {
     editedContact.updateDate = editDate;
     editedContact.updated = "true";
 
-    db.query(updateItem, [editedContact.name, editedContact.phone, editedContact.email, editedContact.updated, editedContact.updateDate, editedContact.contId], function(err) {
+    db.query(updateItem, [editedContact.name, editedContact.email, editedContact.phone, editedContact.updated, editedContact.updateDate, editedContact.contId], function(err) {
         if(err) {
             console.log('Error updating contact.');
             callback(err);

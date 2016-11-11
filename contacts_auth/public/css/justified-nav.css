@@ -198,3 +198,13 @@ body {
 .indexparg {
   margin-top: 2em;
 }
+
+.updateDate {
+  color: mediumseagreen;
+  text-align: left;
+  margin-left: 3%;
+}
+
+.viewDate {
+  opacity: 0;
+}

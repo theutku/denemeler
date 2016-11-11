@@ -228,7 +228,6 @@ router.post('/users/editcontact', function(req, res) {
     req.checkBody('editEmail', 'Contact Email cannot be empty.').notEmpty();
     req.checkBody('editEmail', 'Contact Email is not valid.').isEmail();
     req.checkBody('editPhone', 'Contact Phone Number cannot be empty.').notEmpty();
-    req.checkBody('editId', 'Contact Phone Number cannot be empty.').notEmpty();
 
     var editErrors = req.validationErrors();
 
@@ -250,6 +249,7 @@ router.post('/users/editcontact', function(req, res) {
 
         contactModel.editContact(editedContact, function(err) {
             if(err) {
+                console.log(err);
                 req.flash('errorMsg', 'Error updating contact.');
                 res.redirect('/users/contacts');
             } else {

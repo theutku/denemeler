@@ -58,17 +58,17 @@
           <h4 class="form-signin-heading">Edit Contact</h4>
         <div class="input-group margin-bottom-sm">
           <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
-          <input class="form-control" type="text" placeholder="Name" name="contName" id="editName">
+          <input class="form-control" type="text" placeholder="Name" name="editName" id="editName">
         </div>
         <br>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-          <input class="form-control" type="email" placeholder="E - Mail" name="contEmail" id="editEmail">
+          <input class="form-control" type="email" placeholder="E - Mail" name="editEmail" id="editEmail">
         </div>
         <br>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-          <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone" id="editPhone">
+          <input class="form-control" type="tel" placeholder="Phone Number" name="editPhone" id="editPhone">
         </div>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
@@ -83,6 +83,10 @@
             <% contacts.forEach(function(item) { %>
               <section class="eachCont" id="<%= item.id %>">
                 <div class="col-lg-12" id="contactCont">
+                  <% if(item.updated == "true") { %>
+                    <h4 class="updateDate"><i class="fa fa-history" aria-hidden="true"></i><span class="viewDate"> <%= item.updateDate %></span></h4>
+                  <% } %>
+                  
                   <h1><i class="fa fa-id-card-o"></i><span class="contname"> <%= item.contname %></span></h1>
                   <p class="lead"><i class="fa fa-envelope"></i><span class="contemail"> <%= item.contemail %></span></p>
                   <p class="lead"><i class="fa fa-phone"></i><span class="contphone"> <%= item.contphone %></span></p>

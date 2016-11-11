@@ -106,3 +106,13 @@ $(document).ready(function() {
         
     });
 });
+
+//Display Update Date on Hover =========================================
+
+$(document).ready(function() {
+    $('.fa-history').mouseenter(function() {
+        $(this).next().fadeTo('slow', 1);
+    }).mouseleave(function() {
+        $(this).next().fadeTo('slow', 0);
+    })
+});
