@@ -9,6 +9,9 @@
       
       <% include ./partials/header.ejs %>
       <h2 class="page-header">Contact List</h2>
+      <% if(contacts.length) { %>
+        <h4>Total Records: <i class="fa fa-user-circle-o"></i> <%= contacts.length %></h4>
+      <% } %>
             <% if(errors) { %>
               <% errors.forEach(function(item) { %>
                 <div class="alert alert-danger"><%= item.msg %></div>
@@ -48,7 +51,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
         </form>
 
-        <form id="editContForm" class="form-signin" method="post" action="/users/newcontact">
+        <form id="editContForm" class="form-signin" method="post" action="/users/editcontact">
 
           <div class="cancel"><button type="button" class="btn-xs btn-primary">X</button></div>
           
@@ -67,8 +70,12 @@
           <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
           <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone" id="editPhone">
         </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+          <input class="form-control" type="tel" placeholder="ID" name="editId" id="editId">
+        </div>
         <br>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+        <button type="submit" class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
         </form>
 
         <section id="contDisplay">
@@ -76,15 +83,14 @@
             <% contacts.forEach(function(item) { %>
               <section class="eachCont" id="<%= item.id %>">
                 <div class="col-lg-12" id="contactCont">
-              
-                <h1><i class="fa fa-id-card-o"></i><span class="contname"> <%= item.contname %></span></h1>
-                <p class="lead"><i class="fa fa-envelope"></i><span class="contemail"> <%= item.contemail %></span></p>
-                <p class="lead"><i class="fa fa-phone"></i><span class="contphone"> <%= item.contphone %></span></p>
-
-                <form onsubmit="return checkUser()" action="/users/deletecont/<%= item.id %>" method="POST" >
-                  <p><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> | Delete Contact</button></p>
-                </form>
-                  <p class="editBtn"><button class="btn btn-primary"><i class="fa fa-pencil"></i> | Edit Contact</button></p>                
+                  <h1><i class="fa fa-id-card-o"></i><span class="contname"> <%= item.contname %></span></h1>
+                  <p class="lead"><i class="fa fa-envelope"></i><span class="contemail"> <%= item.contemail %></span></p>
+                  <p class="lead"><i class="fa fa-phone"></i><span class="contphone"> <%= item.contphone %></span></p>
+            
+                  <p class="editBtn"><button class="btn btn-primary"><i class="fa fa-pencil"></i> | Edit Contact</button></p> 
+                  <form onsubmit="return checkUser()" action="/users/deletecont/<%= item.id %>" method="POST" >
+                    <p><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> | Delete Contact</button></p>
+                  </form>               
                 </div>
               </section>
             <% }); %>

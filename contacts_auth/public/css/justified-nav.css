@@ -183,3 +183,18 @@ body {
 .cancel {
   text-align: right;
 }
+
+.indeximg {
+  float: left;
+  margin-top: 2em;
+  margin-bottom: 3em;
+}
+
+#logo {
+  height: 70%;
+  width: 70%;
+}
+
+.indexparg {
+  margin-top: 2em;
+}

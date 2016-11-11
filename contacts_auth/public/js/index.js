@@ -39,35 +39,37 @@ function checkUser() {
     }
 }
 
-
-
 // Reveal New Contact Form & Edit Contact =====================
+var id = "";
 
 $(document).ready(function() {
 
     var visible = false;
 
-    //Close Forms with Button =================================
-    $('.btn-xs').click(function() {
-        $('#newContForm').slideUp('slow');
-        $('#editContForm').slideUp('slow');
+    //Return to Original State of Page ========================
+    var rollBack = function() {
         $('#editing').remove(); 
         $('.col-lg-12').css('background-color', '#eee');
         $('#editName').val('');
         $('#editEmail').val('');
         $('#editPhone').val('');
+        id = "";
+    }
+
+    //Close Forms with Button =================================
+    $('.btn-xs').click(function() {
+        $('#newContForm').slideUp('slow');
+        $('#editContForm').slideUp('slow');
+        rollBack();
         visible = false;
+        
     });
 
     //Reveal New Contact Form =================================
     $('#formButton').click(function() {
         $('#newContForm').slideToggle('slow');
         $('#editContForm').slideUp('slow');
-        $('#editing').remove(); 
-        $('.col-lg-12').css('background-color', '#eee');
-        $('#editName').val('');
-        $('#editEmail').val('');
-        $('#editPhone').val('');
+        rollBack();
         visible = false;
     });
 
@@ -84,10 +86,12 @@ $(document).ready(function() {
             var name = $(this).closest(':has(h1 i)').find('h1 span').text().trim();
             var email = $(this).closest(':has(p i)').find('p .contemail').text().trim();
             var phone = $(this).closest(':has(p i)').find('p .contphone').text().trim();
+            id = $(this).closest('.eachCont').attr('id');
 
             $('#editName').val(name);
             $('#editEmail').val(email);
             $('#editPhone').val(phone);
+            $('#editId').val(id);
 
             visible = true;
 
@@ -95,27 +99,10 @@ $(document).ready(function() {
 
             $('#editContForm').slideToggle('slow');
             $('#newContForm').slideUp('slow');
-            $('.col-lg-12').css('background-color', '#eee');
-            $('#editName').val('');
-            $('#editEmail').val('');
-            $('#editPhone').val('');
-            $('#editing').remove();
+            rollBack();
             
             visible = false;
         }
         
-        // var name = $(this).closest('.contname').val();
-        // var phone = $(this).closest('.contphone').val();
-        // var email = $(this).closest('.contemail').val();
-
-        // $('#editName').text(name);
-        // $('#editEmail').text(email);
-        // $('#editPhone').text(phone);
     });
 });
-
-
-// function editContact() {
-//     $('#editContForm').slideToggle('slow');
-//     $('#newContForm').slideUp('slow');
-// }

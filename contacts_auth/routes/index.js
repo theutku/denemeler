@@ -215,6 +215,51 @@ router.post('/users/deletecont/:id', function(req, res) {
     });
 });
 
+// EDIT Contact =================================================
+
+router.post('/users/editcontact', function(req, res) {
+    
+    var editId = req.body.editId;
+    var editName = req.body.editName;
+    var editEmail = req.body.editEmail;
+    var editPhone = req.body.editPhone;
+
+    req.checkBody('editName', 'Contact Name cannot be empty.').notEmpty();
+    req.checkBody('editEmail', 'Contact Email cannot be empty.').notEmpty();
+    req.checkBody('editEmail', 'Contact Email is not valid.').isEmail();
+    req.checkBody('editPhone', 'Contact Phone Number cannot be empty.').notEmpty();
+    req.checkBody('editId', 'Contact Phone Number cannot be empty.').notEmpty();
+
+    var editErrors = req.validationErrors();
+
+    if(editErrors) {
+        console.log('Edit form is not fulfilled.');
+        res.redirect('/');
+        // res.render('contacts', {
+        //     title: 'Error',
+        //     errors: editErrors
+        // });
+    } else {
+
+        var editedContact = {
+            name: editName,
+            email: editEmail,
+            phone: editPhone,
+            contId: editId
+        }
+
+        contactModel.editContact(editedContact, function(err) {
+            if(err) {
+                req.flash('errorMsg', 'Error updating contact.');
+                res.redirect('/users/contacts');
+            } else {
+                req.flash('successMsg', 'Contact updated.');
+                res.redirect('/users/contacts');
+            }
+        });
+    }
+});
+
 // Check Authorization for Page Navigation ======================
 
 function isLoggedIn(req, res, next) {

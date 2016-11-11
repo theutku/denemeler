@@ -20,8 +20,9 @@ var contactModel = module.exports;
 var findByName = 'SELECT * from contactslist where contname = ?';
 var findByUserId = 'SELECT * from contactslist where belongId = ?';
 var findByEmail = 'SELECT * from contactslist where contemail = ?';
-var insertItem = 'INSERT INTO contactslist(belongId, contname, contemail, contphone, contdate) VALUE(?, ?, ?, ?, ?)';
+var insertItem = 'INSERT INTO contactslist(belongId, contname, contemail, contphone, updated, updateDate, contdate) VALUE(?, ?, ?, ?, ?, ?, ?)';
 var deleteItem = 'DELETE from contactslist where id = ?';
+var updateItem = 'UPDATE contactslist SET contname=?, contemail=?, contphone=?, updated = ?, updateDate=?, where id = ?';
 
 //Add New Contact to Database =========================================
 
@@ -30,7 +31,8 @@ contactModel.addContact = function(newContact, callback) {
     var hashes = [];
     var date = new Date();
     newContact.date = date;    
-
+    newContact.updated = "false";
+    newContact.updateDate = "";
     // for(var x in newContact) {
     //     if(newContact[x].length == 0) {
     //         hashes.push("NA");
@@ -44,7 +46,7 @@ contactModel.addContact = function(newContact, callback) {
     //     }         
     // }
 
-    db.query(insertItem, [newContact.belongId, newContact.contname, newContact.contemail, newContact.contphone, newContact.date], function (err) {
+    db.query(insertItem, [newContact.belongId, newContact.contname, newContact.contemail, newContact.contphone, newContact.updated, newContact.updateDate, newContact.date], function (err) {
         if (err) {
             console.log('Database write error.');
             callback(err);
@@ -89,3 +91,19 @@ contactModel.deleteContact = function(contId, callback) {
 
 // EDIT Contact in Database =========================================
 
+contactModel.editContact = function(editedContact, callback) {
+
+    var editDate = new Date();
+    editedContact.updateDate = editDate;
+    editedContact.updated = "true";
+
+    db.query(updateItem, [editedContact.name, editedContact.phone, editedContact.email, editedContact.updated, editedContact.updateDate, editedContact.contId], function(err) {
+        if(err) {
+            console.log('Error updating contact.');
+            callback(err);
+        } else {
+            console.log('Contact updated successfully');
+            callback(null);
+        }
+    })
+}
