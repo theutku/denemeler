@@ -21,11 +21,14 @@
                 <div class="alert alert-success" id="customSuccess"><%= successMsg %></div>
             <% } %>
         <section id="newContact">
-          <button onclick="return revealForm()" class="btn btn-primary" type="button" id="formButton"><i class="fa fa-user-plus"></i> New Contact</button>
+          <button class="btn btn-primary" type="button" id="formButton"><i class="fa fa-user-plus"></i> New Contact</button>
         </section>
         
 
         <form id="newContForm" class="form-signin" method="post" action="/users/newcontact">
+
+          <div class="cancel"><button type="button" class="btn-xs btn-primary">X</button></div>
+          
           <h4 class="form-signin-heading">Create New Contact</h4>
         <div class="input-group margin-bottom-sm">
           <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
@@ -46,20 +49,23 @@
         </form>
 
         <form id="editContForm" class="form-signin" method="post" action="/users/newcontact">
+
+          <div class="cancel"><button type="button" class="btn-xs btn-primary">X</button></div>
+          
           <h4 class="form-signin-heading">Edit Contact</h4>
         <div class="input-group margin-bottom-sm">
           <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
-          <input class="form-control" type="text" placeholder="Name" name="contName">
+          <input class="form-control" type="text" placeholder="Name" name="contName" id="editName">
         </div>
         <br>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-          <input class="form-control" type="email" placeholder="E - Mail" name="contEmail">
+          <input class="form-control" type="email" placeholder="E - Mail" name="contEmail" id="editEmail">
         </div>
         <br>
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-          <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone">
+          <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone" id="editPhone">
         </div>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
@@ -71,14 +77,14 @@
               <section class="eachCont" id="<%= item.id %>">
                 <div class="col-lg-12" id="contactCont">
               
-                <h1><i class="fa fa-id-card-o"></i> <%= item.contname %></h1>
-                <p class="lead"><i class="fa fa-envelope"></i> <%= item.contemail %></p>
-                <p class="lead"><i class="fa fa-phone"></i> <%= item.contphone %></p>
+                <h1><i class="fa fa-id-card-o"></i><span class="contname"> <%= item.contname %></span></h1>
+                <p class="lead"><i class="fa fa-envelope"></i><span class="contemail"> <%= item.contemail %></span></p>
+                <p class="lead"><i class="fa fa-phone"></i><span class="contphone"> <%= item.contphone %></span></p>
 
                 <form onsubmit="return checkUser()" action="/users/deletecont/<%= item.id %>" method="POST" >
                   <p><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> | Delete Contact</button></p>
                 </form>
-                  <p><button onclick="return editContact()" id="editCont" type="submit" class="btn btn-primary"><i class="fa fa-pencil"></i> | Edit Contact</button></p>                
+                  <p class="editBtn"><button class="btn btn-primary"><i class="fa fa-pencil"></i> | Edit Contact</button></p>                
                 </div>
               </section>
             <% }); %>

@@ -179,3 +179,7 @@ body {
 #contDisplay {
   text-align: center;
 }
+
+.cancel {
+  text-align: right;
+}
