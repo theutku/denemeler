@@ -9,6 +9,8 @@ var contactModel = require('../models/contact');
 
 var router = express.Router();
 
+var conts = [];
+
 // GET Homepage ================================================
 
 router.get('/', function(req, res) {
@@ -61,10 +63,11 @@ router.get('/users/contacts', isLoggedIn, function(req, res) {
                 errors: []
             });
         } else {
+            conts = results;
             res.render('contacts', {
             title: 'Contacts',
             errors: [],
-            contacts: results
+            contacts: conts
             });
         }
     });
@@ -173,7 +176,8 @@ router.post('/users/newcontact', isLoggedIn, function(req, res) {
         console.log('New user form is not fulfilled.');
         res.render('contacts', {
             title: 'Error',
-            errors: contactErrors
+            errors: contactErrors,
+            contacts: conts
         });
     } else {
 
@@ -200,7 +204,7 @@ router.post('/users/newcontact', isLoggedIn, function(req, res) {
 
 // DELETE Contact ===============================================
 
-router.post('/users/deletecont/:id', function(req, res) {
+router.post('/users/deletecont/:id', isLoggedIn, function(req, res) {
 
     var contactId = req.params.id;
 
@@ -217,7 +221,7 @@ router.post('/users/deletecont/:id', function(req, res) {
 
 // EDIT Contact =================================================
 
-router.post('/users/editcontact', function(req, res) {
+router.post('/users/editcontact', isLoggedIn, function(req, res) {
     
     var editId = req.body.editId;
     var editName = req.body.editName;
@@ -233,11 +237,11 @@ router.post('/users/editcontact', function(req, res) {
 
     if(editErrors) {
         console.log('Edit form is not fulfilled.');
-        res.redirect('/');
-        // res.render('contacts', {
-        //     title: 'Error',
-        //     errors: editErrors
-        // });
+        res.render('contacts', {
+            title: 'Error',
+            errors: editErrors,
+            contacts: conts
+        });
     } else {
 
         var editedContact = {

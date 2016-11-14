@@ -208,3 +208,7 @@ body {
 .viewDate {
   opacity: 0;
 }
+
+#idPart {
+  display: none;
+}
