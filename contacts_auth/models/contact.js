@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3400',
+    port: '3306',
     password: '12345',
     database: 'quiz'
 });
@@ -69,6 +69,7 @@ contactModel.listContacts = function(userId, callback) {
            console.log('No contact records.');
            callback(null, false, null);
        } else {
+           
            for(var i=0; i<results.length; i++) {
                if(results[i].updateDate.length) {
                     var trimDate = results[i].updateDate.substring(0,16);
