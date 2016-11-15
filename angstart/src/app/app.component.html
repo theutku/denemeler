@@ -1,7 +1,17 @@
-<h1>
-  {{ title }}
-</h1>
-<p>
-  {{ parg }}
-</p>
-<app-other></app-other>
+<div class="masthead">
+    <h3 class="text-muted"><i class="fa fa-address-book-o"></i> ContactsApp</h3>
+    <nav>
+        <ul class="nav nav-justified">
+            <li id="home" [class]="{{ checkClass }}"><a href="/">Home</a></li>
+            <li id="register"><a href="/users/register">Register</a></li>
+            <li id="login"><a href="/users/login">Login</a></li>
+            <li id="contacts"><a href="/users/contacts">Contacts</a></li>
+            <li id="account"><a href="/users/account">Account</a></li>
+            <!--<li><a href="/users/logout"><i class="fa fa-user fa-fw"></i> <%= user.username %> / Logout</a></li>            -->          
+        </ul>
+    </nav>
+</div>
+<home-desc></home-desc>
+<footer class="footer">
+	<p>&copy; 2016 Utku.</p>
+</footer>
