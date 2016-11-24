@@ -63,7 +63,6 @@ router.get('/users/contacts', resHeader, function(req, res) {
                 errors: []
             });
         } else {
-            conts = results;
             res.send(results);
         }
     });
