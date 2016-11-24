@@ -1,0 +1,78 @@
+<h2 class="page-header">Contact List</h2>
+
+<button class="btn btn-primary" (click)="getContacts()">Get Contacts</button>
+
+<section id="newContact">
+    <button class="btn btn-primary" type="button" id="formButton"><i class="fa fa-user-plus"></i> New Contact</button>
+</section>
+
+
+<form id="newContForm" class="form-signin" method="post" action="/users/newcontact">
+
+    <div class="cancel"><button type="button" class="btn-xs btn-primary">X</button></div>
+
+    <h4 class="form-signin-heading">Create New Contact</h4>
+    <div class="input-group margin-bottom-sm">
+        <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
+        <input class="form-control" type="text" placeholder="Name" name="contName">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+        <input class="form-control" type="email" placeholder="E - Mail" name="contEmail">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+        <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone">
+    </div>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+</form>
+
+
+<form id="editContForm" class="form-signin" method="post" action="/users/editcontact">
+
+    <div class="cancel"><button type="button" class="btn-xs btn-primary">X</button></div>
+
+    <h4 class="form-signin-heading">Edit Contact</h4>
+    <div class="input-group margin-bottom-sm">
+        <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
+        <input class="form-control" type="text" placeholder="Name" name="editName" id="editName">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+        <input class="form-control" type="email" placeholder="E - Mail" name="editEmail" id="editEmail">
+    </div>
+    <br>
+    <div class="input-group">
+        <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+        <input class="form-control" type="tel" placeholder="Phone Number" name="editPhone" id="editPhone">
+    </div>
+    <div class="input-group" id="idPart">
+        <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+        <input class="form-control" type="tel" placeholder="ID" name="editId" id="editId">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
+</form>
+
+
+<section id="contDisplay">
+    <section *ngFor="let contact of contacts" class="eachCont">
+        <div class="col-lg-12" id="contactCont">
+
+            <h1><i class="fa fa-id-card-o fa-fw"></i><span class="contname"> {{ contact.contname }}</span></h1>
+            <p class="lead"><i class="fa fa-envelope fa-fw"></i><span class="contemail"> {{ contact.contemail }}</span></p>
+            <p class="lead"><i class="fa fa-phone fa-fw"></i><span class="contphone"> {{ contact.contphone }}</span></p>
+
+            <p class="editBtn"><button class="btn btn-primary"><i class="fa fa-pencil"></i> | Edit Contact</button></p>
+            <form onsubmit="return checkUser()" action="/users/deletecont/<%= item.id %>" method="POST">
+                <p><button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i> | Delete Contact</button></p>
+            </form>
+        </div>
+
+
+    </section>
+</section>

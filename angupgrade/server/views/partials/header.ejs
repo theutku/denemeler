@@ -1,0 +1,29 @@
+<div class="masthead">
+    <h3 class="text-muted"><i class="fa fa-address-book-o"></i> ContactsApp</h3>
+    <nav>
+        <ul class="nav nav-justified">
+            <li id="home"><a href="/">Home</a></li>
+            <% if(!user) { %>
+                <li id="register"><a href="/users/register">Register</a></li>
+                <li id="login"><a href="/users/login">Login</a></li>
+            <% } else { %>
+                <li id="contacts"><a href="/users/contacts">Contacts</a></li>
+                <li id="account"><a href="/users/account">Account</a></li>
+                <li><a href="/users/logout"><i class="fa fa-user fa-fw"></i> <%= user.username %> / Logout</a></li>
+
+                <!--<li class="dropdown"><a class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user fa-fw"></i> <%= user.username %> <span class="fa fa-caret-down" title="Toggle dropdown menu"></span></a>
+                        
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Account</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#"><i class="fa fa-unlock"></i> Logout</a></li>
+                    </ul>
+                </li>-->
+            <% } %>
+            
+            
+        </ul>
+    </nav>
+</div>
