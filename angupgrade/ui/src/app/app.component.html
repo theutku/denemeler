@@ -3,11 +3,11 @@
     <h3 class="text-muted"><i class="fa fa-address-book-o"></i> {{ title }}</h3>
     <nav>
         <ul class="nav nav-justified">
-            <li id="home"><a href="/">Home</a></li>
-                <li id="register"><a [routerLink]="['/users/register']">Register</a></li>
-                <li id="login"><a [routerLink]="['/users/login']">Login</a></li>
-                <li id="contacts"><a [routerLink]="['/users/contacts']">Contacts</a></li>
-                <li id="account"><a [routerLink]="['/users/account']">Account</a></li>
+                <li id="home" [routerLinkActive]="['active']"><a [routerLink]="['/home']">Home</a></li>
+                <li id="register" [routerLinkActive]="['active']"><a [routerLink]="['/users/register']">Register</a></li>
+                <li id="login" [routerLinkActive]="['active']"><a [routerLink]="['/users/login']">Login</a></li>
+                <li id="contacts" [routerLinkActive]="['active']"><a [routerLink]="['/users/contacts']">Contacts</a></li>
+                <li id="account" [routerLinkActive]="['active']"><a [routerLink]="['/users/account']">Account</a></li>
                 <li><a href="/users/logout"><i class="fa fa-user fa-fw"></i>  / Logout</a></li>
         </ul>
     </nav>

@@ -49,19 +49,12 @@ router.get('/users/login', isNotLoggedIn, function(req, res) {
 router.get('/users/contacts', resHeader, function(req, res) {
     contactModel.listContacts(2, function(err, contactExist, results) {
         if(err) {
-            req.flash('errorMsg', 'Error listing contacts.');
-            res.render('contacts', {
-                title: 'Error',
-                contacts: [],
-                errors: []
-            });
+            console.log(err);
+            res.sendStatus(500);
+            res.send(results);
         } else if(!contactExist) {
-            req.flash('successMsg', 'No contacts found.');
-            res.render('contacts', {
-                title: 'Contacts',
-                contacts: [],
-                errors: []
-            });
+            console.log(results);
+            res.send(results);
         } else {
             res.send(results);
         }
@@ -72,11 +65,10 @@ router.get('/users/contacts', resHeader, function(req, res) {
 
 // POST Login Page =============================================
 
-router.post('/users/login', passport.authenticate('local-login', {
-    successRedirect: '/users/contacts',
-    failureRedirect: '/users/login',
-    failureFlash: true
-}));
+router.post('/users/login', resHeader, passport.authenticate('local-login'), function(req, res) {
+        res.sendStatus(200);
+    }
+);
 
 // GET Logout ==================================================
 
@@ -200,17 +192,16 @@ router.post('/users/newcontact', isLoggedIn, function(req, res) {
 
 // DELETE Contact ===============================================
 
-router.post('/users/deletecont/:id', isLoggedIn, function(req, res) {
+router.post('/users/deletecont/:id', resHeader, function(req, res) {
 
     var contactId = req.params.id;
 
     contactModel.deleteContact(contactId, function(err) {
         if(err) {
             req.flash('errorMsg', 'Error deleting contact.');
-            res.redirect('/users/contacts');
+            res.sendStatus(500);
         } else {
-            req.flash('successMsg', 'Contact deleted.');
-            res.redirect('/users/contacts');
+            res.sendStatus(200);
         }
     });
 });

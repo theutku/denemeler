@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { PostsService } from '../../posts.service';
+import { Component, OnInit } from '@angular/core';
+import { GetService } from '../../get.service';
+import { PostService } from '../../post.service';
 
 import { Contact } from '../../models/contact.component'; 
 
@@ -7,21 +8,38 @@ import { Contact } from '../../models/contact.component';
     selector: 'app-contacts',
     templateUrl: 'contacts.component.html',
     styleUrls: ['../../../styles/styles.css'],
-    providers: [PostsService]
+    providers: [GetService, PostService]
 })
 
-export class ContactsComponent {
+export class ContactsComponent implements OnInit{
 
     contacts: Contact[];
 
 
-    constructor(private postsService: PostsService) { }
+    constructor(private getService: GetService, private postService: PostService) {
+        
+     }
 
     getContacts() {
-        this.postsService.getData().subscribe(contacts => {
+        this.getService.getData().subscribe(contacts => {
             this.contacts = contacts;
-        }, error => console.log('Cannot get contacts from server.'));   
+            console.log('got contacts');
+        }, error => console.log('Cannot get contacts from server.'));
     }
+
+    ngOnInit() {
+        this.getContacts();
+    }
+
+    deleteContact(id: number) {
+           console.log(id);
+           this.postService.deleteContact(id).subscribe(() => {
+               console.log('deleted');
+               return this.getContacts();
+            });
+           
+    }
+  
 }
 
 

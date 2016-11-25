@@ -67,7 +67,7 @@ contactModel.listContacts = function(userId, callback) {
            callback(err);
        } else if(!results.length) {
            console.log('No contact records.');
-           callback(null, false, null);
+           callback(null, false, "");
        } else {
            
            for(var i=0; i<results.length; i++) {
