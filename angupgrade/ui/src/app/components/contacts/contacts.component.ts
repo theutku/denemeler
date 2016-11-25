@@ -20,7 +20,7 @@ export class ContactsComponent {
     getContacts() {
         this.postsService.getData().subscribe(contacts => {
             this.contacts = contacts;
-        });   
+        }, error => console.log('Cannot get contacts from server.'));   
     }
 }
 
