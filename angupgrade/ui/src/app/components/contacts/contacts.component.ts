@@ -22,8 +22,12 @@ export class ContactsComponent implements OnInit{
 
     getContacts() {
         this.getService.getData().subscribe(contacts => {
+            if(contacts.length) {
             this.contacts = contacts;
             console.log('got contacts');
+            } else {
+                console.log('No contacts found.');
+            }
         }, error => console.log('Cannot get contacts from server.'));
     }
 

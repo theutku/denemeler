@@ -57,7 +57,7 @@
 </form>
 
 
-<section id="contDisplay">
+<section *ngIf="contacts" id="contDisplay">
     <section *ngFor="let contact of contacts" class="eachCont">
         <div class="col-lg-12" id="contactCont">
 

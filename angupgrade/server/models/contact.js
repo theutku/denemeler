@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3400',
+    port: '3306',
     password: '12345',
     database: 'quiz'
 });
@@ -67,7 +67,7 @@ contactModel.listContacts = function(userId, callback) {
            callback(err);
        } else if(!results.length) {
            console.log('No contact records.');
-           callback(null, false, "");
+           callback(null, false, []);
        } else {
            
            for(var i=0; i<results.length; i++) {

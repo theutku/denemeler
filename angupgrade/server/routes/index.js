@@ -50,11 +50,10 @@ router.get('/users/contacts', resHeader, function(req, res) {
     contactModel.listContacts(2, function(err, contactExist, results) {
         if(err) {
             console.log(err);
-            res.sendStatus(500);
-            res.send(results);
+            res.status(500).send(results);
         } else if(!contactExist) {
             console.log(results);
-            res.send(results);
+            res.status(200).send(results);
         } else {
             res.send(results);
         }
