@@ -6978,3 +6978,13 @@ body {
 #idPart {
   display: none;
 }
+
+.error {
+  width: 50%;
+   margin: 0 auto;
+}
+
+.panel-danger {
+  margin-top: 4%;
+  margin-bottom: 4%;
+}

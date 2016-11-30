@@ -1,6 +1,17 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router'
 import { PostService } from '../../post.service';
 import { User } from '../../models/user.component';
+
+interface CurrentLoginModel {
+    username: string;
+    password: string;
+}
+
+class CurrentLogin implements CurrentLoginModel {
+    username: "";
+    password: "";
+}
 
 @Component({
     selector: 'app-login',
@@ -11,20 +22,16 @@ import { User } from '../../models/user.component';
 
 export class LoginComponent {
 
-    currentLogin: User = {
-        username: "",
-        password: ""
-    }
+    currentLogin = new CurrentLogin();
     
-    constructor(private postService: PostService) {
+    constructor(private postService: PostService, private router: Router) {
 
     }
 
     login() {
-        // this.currentLogin.username = username;
-        // this.currentLogin.password = password;
-        this.postService.login(this.currentLogin).subscribe(() => {
+        this.postService.login(this.currentLogin).then(() => {
             console.log('Login successful.');
-        });
+            this.router.navigate(['/users/contacts']);
+        }).catch(error => console.log('Cannot login: ', error));
     }
 }

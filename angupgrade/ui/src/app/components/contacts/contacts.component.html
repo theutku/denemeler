@@ -56,6 +56,24 @@
     <button type="submit" class="btn btn-lg btn-primary btn-block" type="submit">Edit</button>
 </form>
 
+<div *ngIf="errorMessage || errorContent" class="error">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ errorMessage }}</h3>
+        </div>
+        <div class="panel-body">{{ errorContent }}</div>
+    </div>
+</div>
+
+<div *ngIf="successMessage || successContent" class="error">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-user-o" aria-hidden="true"></i> {{ successMessage }}</h3>
+        </div>
+        <div class="panel-body">{{ successContent }}</div>
+    </div>
+</div>
+
 
 <section *ngIf="contacts" id="contDisplay">
     <section *ngFor="let contact of contacts" class="eachCont">
