@@ -8,6 +8,8 @@
 /node_modules
 /bower_components
 node_modules
+/data
+data
 
 # IDEs and editors
 /.idea

@@ -1,6 +1,11 @@
 export interface Contact {
-    id: number;
-    contname: string;
-    contemail: string;
-    contphone: string;
+    name: string;
+    email: string;
+    phone: string;
+}
+
+export class NewContact implements Contact {
+    name = "";
+    email = "";
+    phone = "";   
 }

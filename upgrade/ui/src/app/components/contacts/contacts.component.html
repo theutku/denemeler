@@ -5,24 +5,24 @@
 </section>
 
 
-<form id="newContForm" class="form-signin" method="post" action="/users/newcontact">
+<form (ngSubmit)="addContact()" id="newContForm" class="form-signin" method="post" action="/users/newcontact">
 
     <div class="cancel"><button type="button" class="btn-xs btn-primary">X</button></div>
 
     <h4 class="form-signin-heading">Create New Contact</h4>
     <div class="input-group margin-bottom-sm">
         <span class="input-group-addon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
-        <input class="form-control" type="text" placeholder="Name" name="contName">
+        <input class="form-control" type="text" placeholder="Name" name="contName" [(ngModel)]="newContact.name">
     </div>
     <br>
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
-        <input class="form-control" type="email" placeholder="E - Mail" name="contEmail">
+        <input class="form-control" type="email" placeholder="E - Mail" name="contEmail" [(ngModel)]="newContact.email">
     </div>
     <br>
     <div class="input-group">
         <span class="input-group-addon"><i class="fa fa-phone" aria-hidden="true"></i></span>
-        <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone">
+        <input class="form-control" type="tel" placeholder="Phone Number" name="contPhone" [(ngModel)]="newContact.phone">
     </div>
     <br>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>

@@ -28,10 +28,4 @@ export class LoginComponent {
 
     }
 
-    login() {
-        this.postService.login(this.currentLogin).then(() => {
-            console.log('Login successful.');
-            this.router.navigate(['/users/contacts']);
-        }).catch(error => console.log('Cannot login: ', error));
-    }
 }

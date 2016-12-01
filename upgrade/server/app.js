@@ -6,10 +6,13 @@ const mongoose = require('mongoose');
 const app = express();
 const port = process.env.PORT || 3000;
 
-const apiRouter = require('./routes/api.js');
-const mainRouter = require('./routes/main.js');
+const apiRouter = require('./routes/api');
+const mainRouter = require('./routes/main');
 
-const db = 'localhost://'
+const db = 'mongodb://localhost:27017/angupgrade';
+mongoose.connect(db, (err) => {
+    (err) ? console.log('Error connecting to database.') : console.log('Successfully connected to database: ' + db); 
+});
 
 app.use(morgan('dev'));
 app.use(bodyParser.json());
@@ -20,12 +23,8 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-mongoose.connect(db, (err) => {
-    (err) ? console.log('Error connecting to database.') : console.log('Successfully connected to database: ' + db); 
-});
-
-app.use('/users', apiRouter);
 app.use('/', mainRouter);
+app.use('/users', apiRouter);
 
 app.listen(port, function(err) {
     if(err) {
