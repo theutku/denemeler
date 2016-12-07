@@ -9,8 +9,10 @@
         "noImplicitAny": true,
         "experimentalDecorators": true,
         "rootDir": "src",
+        "outDir": "bin",
         "sourceMap": true,
-        "suppressImplicitAnyIndexErrors": true                
+        "suppressImplicitAnyIndexErrors": true,
+        "removeComments": true                
     },
     "exclude": [
         "node_modules/"
