@@ -26,6 +26,11 @@ app.set('view engine', 'ejs');
 app.use('/', mainRouter);
 app.use('/users', apiRouter);
 
+// app.use((req, res) => {
+//     res.setHeader('Access-Control-Allow-Origin', '*');
+//     next();
+// })
+
 app.listen(port, function(err) {
     if(err) {
         console.log('Error listening app')

@@ -20,9 +20,12 @@ export class ContactsComponent {
     constructor(private getService: GetService, private postService: PostService) {
         
     }
+
+    getContacts() {
+        
+    }
   
     addContact() {
-        console.log(this.newContact);
         this.postService.addContact(this.newContact)
                         .then(res => console.log(res))
                         .catch(err => console.log(err));

@@ -14,7 +14,8 @@ export class PostService {
     constructor(private http: Http) {}
 
     addContact(newContact) {
-        const headers = new Headers({ 'Content-Type': 'application/json'});
+        console.log(newContact);
+        var headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded'});
         return this.http.post(this.newContactUrl, newContact, headers)
                         .toPromise()
                         .then(res => res.json())

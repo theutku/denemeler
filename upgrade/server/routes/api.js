@@ -4,11 +4,11 @@ const router = express.Router();
 const Model = require('../models/database');
 const userModel = require('../models/user');
 
-router.post('/users/login', (req,res) => {
+router.post('/login', (req,res) => {
     
 });
 
-router.post('/users/addcontact', resHeader, (req, res) => {
+router.post('/addcontact', resHeader, function(req, res) {
     var newContact = new Model(req.body);
     newContact.save((err, resource) => {
         if(err) {
@@ -16,7 +16,7 @@ router.post('/users/addcontact', resHeader, (req, res) => {
             res.status(500).send(err);
         } else {
             console.log('New contact saved successfully');
-            res.send(resource);
+            res.status(200).send(resource);
         }
     });
 });
