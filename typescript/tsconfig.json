@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "watch": true,
+        "declaration": false,
+        "listFiles": false,
+        "target": "ES6",
+        "module": "commonjs",     
+        "noEmitOnError": true,
+        "noImplicitAny": true,
+        "experimentalDecorators": true,
+        "rootDir": "src",
+        "sourceMap": true,
+        "suppressImplicitAnyIndexErrors": true                
+    },
+    "exclude": [
+        "node_modules/"
+    ]
+}

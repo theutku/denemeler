@@ -1,0 +1,28 @@
+{
+  "name": "ts-express",
+  "version": "1.0.0",
+  "description": "ts with express",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typings": "typings",
+    "tsc": "tsc",
+    "start": "npm run tsc && node ."
+  },
+  "keywords": [
+    "ts",
+    "express",
+    "node"
+  ],
+  "author": "utku",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "morgan": "^1.7.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.0.10",
+    "typings": "^2.0.0"
+  }
+}

@@ -26,7 +26,7 @@ app.set('view engine', 'ejs');
 app.use('/', mainRouter);
 app.use('/users', apiRouter);
 
-// app.use((req, res) => {
+// app.use((req, res, next) => {
 //     res.setHeader('Access-Control-Allow-Origin', '*');
 //     next();
 // })

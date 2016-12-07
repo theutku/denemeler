@@ -8,7 +8,7 @@ router.post('/login', (req,res) => {
     
 });
 
-router.post('/addcontact', resHeader, function(req, res) {
+router.post('/addcontact', resHeader, (req, res) => {
     var newContact = new Model(req.body);
     newContact.save((err, resource) => {
         if(err) {
