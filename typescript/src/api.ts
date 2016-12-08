@@ -6,6 +6,7 @@ import * as path from 'path';
 import config from './config';
 import * as http from 'http';
 import * as logger from 'morgan';
+import db from './database';
 
 class ApiApp {
 
@@ -17,9 +18,22 @@ class ApiApp {
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(bodyParser.json());
 
+        this.app.use(logger('dev'));
+
         const server = http.createServer(this.app);
 
         server.listen(config.port);
+
+        db.connect();
+
+        server.on('error', (e: Error) => {
+            console.log('Error starting app: ' + e);
+        });
+
+        server.on('listening', () => {
+            console.log('App started listening at port: ' + config.port);
+        });
+
     }
 
     constructor() {
