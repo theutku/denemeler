@@ -4,6 +4,7 @@ import * as logger from 'morgan';
 import * as http from 'http';
 import config from './config';
 import db from './db';
+import routes from './routes'
 
 export class ApiApp {
 
@@ -22,6 +23,11 @@ export class ApiApp {
             this.app.use(bodyParser.urlencoded({ extended: true }));
             this.app.use(bodyParser.json());
             this.app.use(logger('dev'));
+
+            this.app.set('view engine', 'ejs');
+            this.app.set('views', __dirname + '../views');
+            
+            this.app.use('/', routes);
 
             const server = http.createServer(this.app);
 

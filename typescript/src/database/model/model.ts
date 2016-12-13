@@ -7,4 +7,4 @@ export const UserSchema = new mongoose.Schema({
     created: Date
 });
 
-export default (conn: mongoose.Connection) => (User)
+//export default (conn: mongoose.Connection) => (User)

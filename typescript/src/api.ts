@@ -1,5 +1,3 @@
-"use strict";
-
 import * as bodyParser from 'body-parser'
 import * as express from 'express';
 import * as path from 'path';
@@ -15,24 +13,23 @@ class ApiApp {
     bootsrap() {
         this.app = express();
 
-        this.app.use(bodyParser.urlencoded({extended: true}));
+        this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
 
         this.app.use(logger('dev'));
 
         const server = http.createServer(this.app);
 
-        server.listen(config.port);
 
-        db.connect();
-
-        server.on('error', (e: Error) => {
-            console.log('Error starting app: ' + e);
-        });
-
-        server.on('listening', () => {
+        db.connect().then(() => {
+            server.listen(config.port);
             console.log('App started listening at port: ' + config.port);
-        });
+
+
+        }).catch((err) => {
+            console.log('Error starting app. Cannot connect to database.');
+
+        })
 
     }
 
@@ -42,4 +39,4 @@ class ApiApp {
 }
 
 var App: ApiApp
-export default () => (App = new ApiApp()); 
+export default () => { return App = new ApiApp() }

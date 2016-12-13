@@ -3,15 +3,23 @@ import * as mongoose from 'mongoose';
 import * as mongodb from 'mongodb';
 
 export class DBManager {
-    
-    public connection: mongoose.Connection;
+
+    private connection: mongoose.Connection;
 
     connect() {
-        
-        var connString = 'mongodb://' + config.dbaddress + ':' + config.dbport + '/' + config.dbname;
+        return new Promise((resolve, reject) => {
 
-        this.connection = mongoose.createConnection(connString);
+            var connString = 'mongodb://' + config.dbaddress + ':' + config.dbport + '/' + config.dbname;
 
+            this.connection = mongoose.createConnection(connString, (err: Error) => {
+                if(err) {
+                    console.log(err);
+                    reject(err);
+                }
+                resolve();
+            });
+
+        });
     }
 }
 
