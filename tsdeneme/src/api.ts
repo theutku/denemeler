@@ -27,7 +27,7 @@ export class ApiApp {
             this.app.set('view engine', 'ejs');
             this.app.set('views', __dirname + '../views');
             
-            this.app.use('/', routes);
+            this.app.use('/', routes.router);
 
             const server = http.createServer(this.app);
 

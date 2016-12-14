@@ -1,5 +1,5 @@
 import * as express from 'express';
 
 export class Base {
-    router = express.Router();
+    router: express.Router = express.Router();
 }
