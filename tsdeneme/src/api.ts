@@ -4,7 +4,9 @@ import * as logger from 'morgan';
 import * as http from 'http';
 import config from './config';
 import db from './db';
-import routes from './routes'
+import routeLoader from './routes/base';
+import * as path from 'path';
+
 
 export class ApiApp {
 
@@ -25,9 +27,10 @@ export class ApiApp {
             this.app.use(logger('dev'));
 
             this.app.set('view engine', 'ejs');
-            this.app.set('views', __dirname + '../views');
-            
-            this.app.use('/', routes.router);
+            this.app.set('views', path.join(__dirname, '../views'));
+
+            routeLoader.use(this.router);
+            this.app.use('/', this.router);
 
             const server = http.createServer(this.app);
 

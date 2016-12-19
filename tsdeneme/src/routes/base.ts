@@ -1,5 +1,10 @@
 import * as express from 'express';
+import * as indexPage from './indexpage'
 
-export class Base {
-    router: express.Router = express.Router();
+export default class RouteLoader {
+    static use(router?: express.Router) {
+        return [
+            indexPage.init(router)
+        ]
+    }
 }

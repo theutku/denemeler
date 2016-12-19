@@ -6,7 +6,7 @@ var mysql = require('mysql');
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3306',
+    port: '3400',
     password: '12345',
     database: 'quiz'
 });
@@ -26,11 +26,11 @@ var updateItem = 'UPDATE contactslist SET contname=?, contemail=?, contphone=?, 
 
 //Add New Contact to Database =========================================
 
-contactModel.addContact = function(newContact, callback) {
+contactModel.addContact = function (newContact, callback) {
 
     var hashes = [];
     var date = new Date();
-    newContact.date = date;    
+    newContact.date = date;
     newContact.updated = "false";
     newContact.updateDate = "";
     // for(var x in newContact) {
@@ -60,34 +60,34 @@ contactModel.addContact = function(newContact, callback) {
 
 //Search for Contacts in Database =====================================
 
-contactModel.listContacts = function(userId, callback) {
-    db.query(findByUserId, userId, function(err, results) {
-       if(err) {
-           console.log('Error searching database for contacts.');
-           callback(err);
-       } else if(!results.length) {
-           console.log('No contact records.');
-           callback(null, false, null);
-       } else {
-           
-           for(var i=0; i<results.length; i++) {
-               if(results[i].updateDate.length) {
-                    var trimDate = results[i].updateDate.substring(0,16);
-                    results[i].updateDate =trimDate;                   
-               }
-           }
-           console.log('Contacts successfully found.');
-           console.log(results);
-           callback(null, true, results);
-       }
+contactModel.listContacts = function (userId, callback) {
+    db.query(findByUserId, userId, function (err, results) {
+        if (err) {
+            console.log('Error searching database for contacts.');
+            callback(err);
+        } else if (!results.length) {
+            console.log('No contact records.');
+            callback(null, false, null);
+        } else {
+
+            for (var i = 0; i < results.length; i++) {
+                if (results[i].updateDate.length) {
+                    var trimDate = results[i].updateDate.substring(0, 16);
+                    results[i].updateDate = trimDate;
+                }
+            }
+            console.log('Contacts successfully found.');
+            console.log(results);
+            callback(null, true, results);
+        }
     });
 }
 
 // DELETE Contact From Database ======================================
 
-contactModel.deleteContact = function(contId, callback) {
-    db.query(deleteItem, contId, function(err) {
-        if(err) {
+contactModel.deleteContact = function (contId, callback) {
+    db.query(deleteItem, contId, function (err) {
+        if (err) {
             console.log('Error deleting contact.');
             callback(err);
         } else {
@@ -99,14 +99,14 @@ contactModel.deleteContact = function(contId, callback) {
 
 // EDIT Contact in Database =========================================
 
-contactModel.editContact = function(editedContact, callback) {
+contactModel.editContact = function (editedContact, callback) {
 
     var editDate = new Date();
     editedContact.updateDate = editDate;
     editedContact.updated = "true";
 
-    db.query(updateItem, [editedContact.name, editedContact.email, editedContact.phone, editedContact.updated, editedContact.updateDate, editedContact.contId], function(err) {
-        if(err) {
+    db.query(updateItem, [editedContact.name, editedContact.email, editedContact.phone, editedContact.updated, editedContact.updateDate, editedContact.contId], function (err) {
+        if (err) {
             console.log('Error updating contact.');
             callback(err);
         } else {

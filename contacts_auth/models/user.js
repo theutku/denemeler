@@ -9,13 +9,13 @@ var LocalStrategy = require('passport-local').Strategy;
 var db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    port: '3306',
+    port: '3400',
     password: '12345',
     database: 'quiz'
 });
 
-db.connect(function(err) {
-    if(err) {
+db.connect(function (err) {
+    if (err) {
         console.log('Error connecting to database.');
         throw err;
     } else {
@@ -38,10 +38,10 @@ var deleteItem = 'DELETE from contactsuser where id = ?';
 //USER MODEL ==========================================================
 //Save New User =======================================================
 
-userModel.createUser = function(newUser, callback) {
+userModel.createUser = function (newUser, callback) {
 
     //User Creation Function ==========================================
-    var createNewUser = function() {
+    var createNewUser = function () {
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(newUser.password, salt, function (err, hash) {
                 newUser.password = hash;
@@ -60,22 +60,22 @@ userModel.createUser = function(newUser, callback) {
     }
 
     //Check If Username Exists ==========================================================
-    db.query(findByUsername, newUser.username, function(err, userResult) {
-        if(err) {
+    db.query(findByUsername, newUser.username, function (err, userResult) {
+        if (err) {
             console.log('Error checking existing usernames for new user creation.');
             callback(err, false, false);
-        } else if(userResult.length) {
+        } else if (userResult.length) {
             console.log('Username already taken.');
             callback(null, true, false);
         } else {
 
             //Check If Email Exists =====================================================
-            db.query(findByEmail, newUser.email, function(error, emailResult) {
-                if(error) {
+            db.query(findByEmail, newUser.email, function (error, emailResult) {
+                if (error) {
                     console.log('Error checking existing emails for new user creation.');
                     callback(error, false, false);
                 }
-                if(emailResult.length) {
+                if (emailResult.length) {
                     console.log('E - mail already taken.');
                     callback(null, false, true);
                 } else {
@@ -89,9 +89,9 @@ userModel.createUser = function(newUser, callback) {
 
 // Delete User Account ================================================
 
-userModel.deleteUser = function(user, callback) {
-    db.query(deleteItem, user.id, function(err) {
-        if(err) {
+userModel.deleteUser = function (user, callback) {
+    db.query(deleteItem, user.id, function (err) {
+        if (err) {
             console.log('Error deleting user.');
             callback(err);
         } else {
@@ -103,40 +103,40 @@ userModel.deleteUser = function(user, callback) {
 
 //Passport ============================================================
 
-userModel.passConfig = function(passport) {
+userModel.passConfig = function (passport) {
 
     //Serialize User ==================================================
-    passport.serializeUser(function(user, done) {
+    passport.serializeUser(function (user, done) {
         console.log('User serialized.');
         return done(null, user.id);
     })
 
     //Deserialize User ================================================
-    passport.deserializeUser(function(id, done) {
-        db.query(findById, id, function(err, result) {
+    passport.deserializeUser(function (id, done) {
+        db.query(findById, id, function (err, result) {
             return done(null, result[0]);
         });
     });
-    
+
     passport.use('local-login', new LocalStrategy({
         passReqToCallback: true
-    }, function(req, username, password, done) {
-        db.query(findByUsername, username, function(err, result) {
-            if(err) {
+    }, function (req, username, password, done) {
+        db.query(findByUsername, username, function (err, result) {
+            if (err) {
                 console.log('Passport: Database error.');
                 return done(err);
             }
-            if(!result.length) {
+            if (!result.length) {
                 console.log('Passport: User not found.');
                 return done(null, false, req.flash('errorMsg', 'User not found.'));
             }
 
-            bcrypt.compare(password, result[0].password, function(err, match) {
-                if(err) {
+            bcrypt.compare(password, result[0].password, function (err, match) {
+                if (err) {
                     console.log('Bcrypt: Error');
                     return done(err);
                 }
-                if(!match) {
+                if (!match) {
                     console.log('Bcrypt: Passwords do not match.');
                     return done(null, false, req.flash('errorMsg', 'Invalid password.'));
                 } else {
