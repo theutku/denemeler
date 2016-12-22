@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-class Route {
+export class RouteBase {
 
     indexRoute(req: express.Request, res: express.Response, next: Function) {
         res.render('index', {
@@ -14,5 +14,5 @@ class Route {
     }
 }
 
-export let route: Route;
-export function init(router?: express.Router) { route = new Route(router) }
+export let route: RouteBase;
+export function init(router?: express.Router) { route = new RouteBase(router) }

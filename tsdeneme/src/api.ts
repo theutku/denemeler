@@ -4,8 +4,11 @@ import * as logger from 'morgan';
 import * as http from 'http';
 import config from './config';
 import db from './db';
-import routeLoader from './routes/base';
 import * as path from 'path';
+
+import webRouteLoader from './routes/web/base';
+import apiRouteLoader from './routes/api/base';
+import * as userRoute from './routes/web/user'
 
 
 export class ApiApp {
@@ -29,12 +32,15 @@ export class ApiApp {
             this.app.set('view engine', 'ejs');
             this.app.set('views', path.join(__dirname, '../views'));
 
-            routeLoader.use(this.router);
+            webRouteLoader.use(this.router);
+            apiRouteLoader.use(this.router);
+
             this.app.use('/', this.router);
+            this.app.use()
 
             const server = http.createServer(this.app);
 
-            db.connect().then(() => {
+            return db.connect().then(() => {
                 server.listen(config.port, (err: Error) => {
                     if (err) {
                         console.log(err);
