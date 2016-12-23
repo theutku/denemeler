@@ -1,5 +1,3 @@
-import ApiApp from './api';
+import App from './api';
 
-ApiApp().bootstrap().then(() => {
-    console.log('App started successfully.');
-});
+App();

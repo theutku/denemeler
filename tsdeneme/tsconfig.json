@@ -4,7 +4,7 @@
         "declaration": false,
         "listFiles": false,
         "target": "ES6",
-        "module": "commonjs",     
+        "module": "commonjs",
         "noEmitOnError": true,
         "noImplicitAny": true,
         "experimentalDecorators": true,
@@ -12,7 +12,7 @@
         "outDir": "bin",
         "sourceMap": true,
         "suppressImplicitAnyIndexErrors": true,
-        "removeComments": true                
+        "removeComments": true
     },
     "exclude": [
         "node_modules/"
