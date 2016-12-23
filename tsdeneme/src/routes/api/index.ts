@@ -13,5 +13,7 @@ export class ApiBase {
     }
 }
 
-export let route: ApiBase;
-export function init(router?: express.Router) { route = new ApiBase(router) }
+export function init(router?: express.Router) {
+    let apiBase = new ApiBase(router);
+    return apiBase.router;
+}

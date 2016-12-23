@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-export class RouteBase {
+export class WebBase {
 
     indexRoute(req: express.Request, res: express.Response, next: Function) {
         res.render('index', {
@@ -10,9 +10,10 @@ export class RouteBase {
 
     constructor(public router?: express.Router) {
         this.router.get('/', this.indexRoute);
-
     }
 }
 
-export let route: RouteBase;
-export function init(router?: express.Router) { route = new RouteBase(router) }
+export function init(router?: express.Router) {
+    let webBase = new WebBase(router);
+    return webBase.router;
+}

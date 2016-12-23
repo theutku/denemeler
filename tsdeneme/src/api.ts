@@ -6,8 +6,8 @@ import config from './config';
 import db from './db';
 import * as path from 'path';
 
-import * as WebUserRoutes from './routes/web/user';
-import * as ApiUserRoutes from './routes/api/user'
+import * as WebUserRoutes from './routes/web/index';
+import * as ApiUserRoutes from './routes/api/index'
 
 
 class ApiApp {
@@ -19,12 +19,20 @@ class ApiApp {
         this.app.use(logger('dev'));
         this.app.use(bodyParser.urlencoded({ extended: true }));
         this.app.use(bodyParser.json());
+
+        this.app.set('view engine', 'ejs');
+        this.app.set('views', path.join(__dirname, '../views'));
     }
 
     private routes(): void {
         this.app.use('/', this.router);
-        this.app.use('/user', ApiUserRoutes.init);
-        this.app.use('/user', WebUserRoutes.init);
+        this.router.get('/', (req, res, next) => {
+            res.render('index', {
+                title: 'Hello TS Express'
+            });
+        });
+        // this.app.use('/user', ApiUserRoutes.init(this.router));
+        // this.app.use('/user', WebUserRoutes.init(this.router));
     }
 
     private normalizePort(val: number | string): number | string | boolean {
