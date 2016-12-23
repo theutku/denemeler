@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { RouteBase } from './index';
 
-class UserRoute extends RouteBase {
+class UserRoute {
 
     getAccountPage(req: express.Request, res: express.Response, next: Function) {
         res.render('account', {
@@ -9,11 +9,9 @@ class UserRoute extends RouteBase {
         })
     }
 
-    constructor(public router?: express.Router) {
-        super(router);
+    constructor(public router: express.Router) {
         this.router.get('/account', this.getAccountPage);
     }
 }
 
-export let route: UserRoute;
-export function init(router: express.Router) { route = new UserRoute(router) }
+export function init(router: express.Router) { return new UserRoute(router) }

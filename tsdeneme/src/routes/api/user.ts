@@ -1,7 +1,7 @@
 import * as express from 'express';
 import { ApiBase } from './index';
 
-export class UserRoutes extends ApiBase {
+export class UserRoutes {
 
     userIndex(req: express.Request, res: express.Response, next: Function) {
         res.render('test', {
@@ -9,11 +9,9 @@ export class UserRoutes extends ApiBase {
         })
     }
 
-    constructor(router?: express.Router) {
-        super(router);
+    constructor(public router: express.Router) {
         this.router.get('/account', this.userIndex);
     }
 }
 
-export let route: UserRoutes;
-export function init(router?: express.Router) { route = new UserRoutes(router) }
+export function init(router?: express.Router) { return new UserRoutes(router) }

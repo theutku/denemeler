@@ -6,8 +6,8 @@ import config from './config';
 import db from './db';
 import * as path from 'path';
 
-import * as userRoute from './routes/web/user';
-import * as UserRoutes from './routes/api/user'
+import * as WebUserRoutes from './routes/web/user';
+import * as ApiUserRoutes from './routes/api/user'
 
 
 class ApiApp {
@@ -23,8 +23,8 @@ class ApiApp {
 
     private routes(): void {
         this.app.use('/', this.router);
-        this.app.use('/user', UserRoutes.init)
-
+        this.app.use('/user', ApiUserRoutes.init);
+        this.app.use('/user', WebUserRoutes.init);
     }
 
     private normalizePort(val: number | string): number | string | boolean {
