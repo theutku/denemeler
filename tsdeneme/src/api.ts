@@ -28,9 +28,11 @@ class ApiApp {
         this.app.use('/', this.router);
         this.router.get('/', (req, res, next) => {
             res.render('index', {
-                title: 'Hello TS Express'
+                title: 'TS Express'
             });
         });
+
+        this.app.use('/user', WebUserRoutes.init(this.router));
         // this.app.use('/user', ApiUserRoutes.init(this.router));
         // this.app.use('/user', WebUserRoutes.init(this.router));
     }
@@ -68,6 +70,8 @@ class ApiApp {
         this.routes();
         this.init();
     }
+
+
 }
 
 

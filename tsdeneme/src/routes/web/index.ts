@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-export class WebBase {
+class WebBase {
 
     indexRoute(req: express.Request, res: express.Response, next: Function) {
         res.render('index', {
@@ -9,11 +9,13 @@ export class WebBase {
     }
 
     constructor(public router?: express.Router) {
-        this.router.get('/', this.indexRoute);
+        this.router.get('/web', this.indexRoute);
     }
 }
 
+var webBase: WebBase
+
 export function init(router?: express.Router) {
-    let webBase = new WebBase(router);
+    webBase = new WebBase(router);
     return webBase.router;
 }

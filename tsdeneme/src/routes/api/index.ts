@@ -1,6 +1,6 @@
 import * as express from 'express';
 
-export class ApiBase {
+class ApiBase {
 
     apiIndex(req: express.Request, res: express.Response, next: Function) {
         res.render('test', {
@@ -9,7 +9,7 @@ export class ApiBase {
     }
 
     constructor(public router?: express.Router) {
-        this.router.get('/', this.apiIndex);
+        this.router.get('/api', this.apiIndex);
     }
 }
 
