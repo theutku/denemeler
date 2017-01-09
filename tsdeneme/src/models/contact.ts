@@ -1,16 +1,23 @@
 import * as mongoose from 'mongoose';
+import config from '../config';
 
-export interface IContactModel {
-    owner: string | mongoose.Types.ObjectId;
-    created: Date;
-    updated?: Date;
+
+export interface IContact {
     name: string;
     surname: string;
     email: string;
-    phone: string; 
+    phone: string;
 }
 
-export interface IDBContactModel extends IContactModel, mongoose.Document{
-
+export interface IContactModel extends IContact {
+    created: Date;
+    updated?: Boolean;
+    version: number;
 }
 
+export class UserCrud {
+
+    createContact(userDocument: IContact) {
+
+    }
+}

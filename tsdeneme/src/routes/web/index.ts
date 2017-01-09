@@ -2,18 +2,18 @@ import * as express from 'express';
 
 class WebBase {
 
-    indexRoute(req: express.Request, res: express.Response, next: Function) {
-        res.render('index', {
-            title: 'Express with TS'
+    private webIndex(req: express.Request, res: express.Response, next: Function) {
+        res.render('test', {
+            title: 'Web Index'
         });
     }
 
     constructor(public router?: express.Router) {
-        this.router.get('/web', this.indexRoute);
+        this.router.get('/user', this.webIndex);
     }
 }
 
-var webBase: WebBase
+let webBase: WebBase
 
 export function init(router?: express.Router) {
     webBase = new WebBase(router);

@@ -14,7 +14,8 @@
                 "PORT": "3000",
                 "DBADRESS": "127.0.0.1",
                 "DBPORT": "27017",
-                "DBNAME": "angupgrade"
+                "DBNAME": "angupgrade",
+                "VERSION": "1.0"
             },
             "runtimeArgs": [
                 "--nolazy"
@@ -24,7 +25,6 @@
             "type": "node",
             "request": "launch",
             "name": "Local",
-
             "program": "${workspaceRoot}/bin/app.js",
             "sourceMaps": true,
             "stopOnEntry": false

@@ -7,7 +7,7 @@ import db from './db';
 import * as path from 'path';
 
 import * as WebUserRoutes from './routes/web/index';
-import * as ApiUserRoutes from './routes/api/index'
+import * as ApiUserRoutes from './routes/api/index';
 
 
 class ApiApp {
@@ -32,9 +32,9 @@ class ApiApp {
             });
         });
 
-        this.app.use('/user', WebUserRoutes.init(this.router));
-        // this.app.use('/user', ApiUserRoutes.init(this.router));
-        // this.app.use('/user', WebUserRoutes.init(this.router));
+        this.app.use('/web', WebUserRoutes.init(this.router));
+        this.app.use('/api', ApiUserRoutes.init(this.router));
+
     }
 
     private normalizePort(val: number | string): number | string | boolean {

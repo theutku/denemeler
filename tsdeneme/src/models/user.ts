@@ -1,6 +1,7 @@
 import * as mongoose from 'mongoose';
+import config from '../config';
 
-export interface ILoginModel{
+export interface ILoginModel {
     username: string;
     password: string;
 }
@@ -13,15 +14,17 @@ export interface ISignupModel extends ILoginModel {
     password: string;
 }
 
-export interface IClientDocument {
-
+export interface IUserModel extends ISignupModel, mongoose.Document {
+    meta: {
+        created: Date,
+        version: number
+    };
 }
 
-export interface IUserDocument extends mongoose.Document, ISignupModel {
-    _meta: {
-        created: Date;
-        updated?: Date;
+class UserCrudRoutes {
+
+    create(newUser: ISignupModel) {
+
     }
-
-    toClient(): IClientDocument; 
 }
+
