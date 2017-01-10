@@ -1,24 +1,27 @@
 import * as mongoose from 'mongoose';
-import { IUserModel } from '../models/user';
+import db from './index';
 
-class DBSchema extends mongoose.Schema {
-
-    presave(doc: IUserModel, next: Function) {
-        try {
-            if (doc.isNew) {
-                let id = mongoose.Types.ObjectId;
-                let date = new Date();
-                doc._id = id;
-                doc.meta.created = date;
-            }
-            next();
-        } catch (err) {
-            next(err);
-        }
-    }
+export interface ILoginModel {
+    username: string;
+    password: string;
 }
 
-export const UserSchema = new DBSchema({
+export interface ISignupModel extends ILoginModel {
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    password: string;
+}
+
+export interface IUserModel extends ISignupModel, mongoose.Document {
+    meta: {
+        created: Date,
+        version: number
+    };
+}
+
+export const UserSchema = new mongoose.Schema({
     meta: { created: { type: Object, required: true }, _v: { type: Number, required: false } },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -29,9 +32,10 @@ export const UserSchema = new DBSchema({
 
 UserSchema.index({ 'email': 1 }, { unique: true });
 
-export let UserModel: IUserModel;
+//export let userModel: mongoose.Model<IUserModel>;
 
-export default (conn: mongoose.Connection) => {
+export let User = db.connection.model<IUserModel>('user', UserSchema);
 
-    (UserModel = conn.model('user', UserSchema))
-};
+// export default (conn: mongoose.Connection) => {
+//     (userModel = conn.model<IUserModel>('user', UserSchema));
+// };

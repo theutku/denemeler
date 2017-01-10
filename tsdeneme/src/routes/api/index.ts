@@ -9,7 +9,7 @@ class ApiBase {
     }
 
     constructor(public router?: express.Router) {
-        this.router.get('/user', this.apiIndex);
+        this.router.get('/api', this.apiIndex);
     }
 }
 

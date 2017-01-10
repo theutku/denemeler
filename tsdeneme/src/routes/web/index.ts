@@ -9,7 +9,7 @@ class WebBase {
     }
 
     constructor(public router?: express.Router) {
-        this.router.get('/user', this.webIndex);
+        this.router.get('/web', this.webIndex);
     }
 }
 

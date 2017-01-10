@@ -8,6 +8,7 @@ import * as path from 'path';
 
 import * as WebUserRoutes from './routes/web/index';
 import * as ApiUserRoutes from './routes/api/index';
+import * as UserRoutes from './routes/web/user';
 
 
 class ApiApp {
@@ -32,8 +33,9 @@ class ApiApp {
             });
         });
 
-        this.app.use('/web', WebUserRoutes.init(this.router));
-        this.app.use('/api', ApiUserRoutes.init(this.router));
+        this.app.use('/user', WebUserRoutes.init(this.router));
+        this.app.use('/user', ApiUserRoutes.init(this.router));
+        this.app.use('/new', UserRoutes.init(this.router));
 
     }
 
