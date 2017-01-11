@@ -1,0 +1,33 @@
+{
+  "name": "tsrest",
+  "version": "1.0.0",
+  "description": "rest api with typescript",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "rest",
+    "ts",
+    "typescript",
+    "api"
+  ],
+  "author": "Utku",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "mongodb": "^2.2.15",
+    "mongoose": "^4.7.2",
+    "morgan": "^1.7.0",
+    "nconf": "^0.8.4",
+    "path": "^0.12.7",
+    "ejs": "*"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.1.3",
+    "typescript": "^2.1.4",
+    "typings": "^2.0.0"
+  }
+}

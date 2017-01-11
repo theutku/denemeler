@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import db from '../index';
 
 export interface ILoginModel {
     username: string;
@@ -37,5 +36,5 @@ export let userModel: mongoose.Model<IUserModel>;
 //export let User = db.connection.model<IUserModel>('user', UserSchema);
 
 export default (conn: mongoose.Connection) => {
-    (userModel = conn.model<IUserModel>('user', UserSchema));
+    userModel = conn.model<IUserModel>('user', UserSchema);
 };

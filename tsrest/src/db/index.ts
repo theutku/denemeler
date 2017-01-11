@@ -1,22 +1,18 @@
 import * as mongoose from 'mongoose';
-import * as mongodb from 'mongodb';
 import config from '../config';
 
-export class DBManager {
+class DBManager {
     connection: mongoose.Connection;
-
 
     connect() {
         return new Promise((resolve, reject) => {
-            var connString = 'mongodb://' + config.dbaddress + ':' + config.dbport + '/' + config.dbname;
+            var connString = 'mongodb://' + config.dbAddress + ':' + config.dbPort + '/' + config.dbName;
 
             this.connection = mongoose.createConnection(connString);
             this.connection.on('connected', () => {
-                require('./models/index').default.use(this);
                 resolve();
             });
-
-            this.connection.on('error', (err) => {
+            this.connection.on('error', (err: Error) => {
                 console.log(err);
                 reject(err);
             });
