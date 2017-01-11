@@ -6,6 +6,7 @@ import * as path from 'path';
 
 import db from './db/index';
 import config from './config';
+import RouteLoader from './routes/index';
 
 class ApiApp {
 
@@ -27,6 +28,8 @@ class ApiApp {
         this.router.get('/test', (req, res, next) => {
             res.status(200).send('App Successful!');
         });
+
+
 
         this.app.use((req, res, next) => {
             res.status(404).send('404 Not Found');
