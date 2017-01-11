@@ -14,7 +14,7 @@
                 "PORT": "3000",
                 "DBADRESS": "127.0.0.1",
                 "DBPORT": "27017",
-                "DBNAME": "angupgrade",
+                "DBNAME": "tsdeneme",
                 "VERSION": "1.0"
             },
             "runtimeArgs": [

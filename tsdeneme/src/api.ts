@@ -26,7 +26,7 @@ class ApiApp {
     }
 
     private routes(): void {
-        this.app.use('/', this.router);
+        this.app.use(this.router);
         this.router.get('/', (req, res, next) => {
             res.render('index', {
                 title: 'TS Express'

@@ -1,6 +1,7 @@
 import * as express from 'express';
-import { User } from '../../db/usermodel';
+import { User } from '../../db/models/usermodel';
 import UserModel from '../../models/crud';
+import config from '../../config';
 
 
 class UserRoutes {
@@ -13,6 +14,10 @@ class UserRoutes {
 
     accountCreateRoute(req: express.Request, res: express.Response, next: Function) {
         var newUser = new User(req.body);
+        newUser.meta = newUser.meta || {
+            created: new Date(),
+            version: config.version
+        }
         UserModel.createUser(newUser).then((user) => {
             res.render('test', {
                 title: 'User Save'

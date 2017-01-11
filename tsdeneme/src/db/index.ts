@@ -12,6 +12,7 @@ export class DBManager {
 
             this.connection = mongoose.createConnection(connString);
             this.connection.on('connected', () => {
+                require('./models/index')
                 resolve();
             });
 

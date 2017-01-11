@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import db from './index';
+import db from '../index';
 
 export interface ILoginModel {
     username: string;
@@ -9,9 +9,7 @@ export interface ILoginModel {
 export interface ISignupModel extends ILoginModel {
     firstName: string;
     lastName: string;
-    username: string;
     email: string;
-    password: string;
 }
 
 export interface IUserModel extends ISignupModel, mongoose.Document {
@@ -21,7 +19,9 @@ export interface IUserModel extends ISignupModel, mongoose.Document {
     };
 }
 
-export const UserSchema = new mongoose.Schema({
+export class IUser extends mongoose.Schema { }
+
+export const UserSchema = new IUser({
     meta: { created: { type: Object, required: true }, _v: { type: Number, required: false } },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
@@ -32,10 +32,10 @@ export const UserSchema = new mongoose.Schema({
 
 UserSchema.index({ 'email': 1 }, { unique: true });
 
-//export let userModel: mongoose.Model<IUserModel>;
+export let userModel: mongoose.Model<IUserModel>;
 
-export let User = db.connection.model<IUserModel>('user', UserSchema);
+//export let User = db.connection.model<IUserModel>('user', UserSchema);
 
-// export default (conn: mongoose.Connection) => {
-//     (userModel = conn.model<IUserModel>('user', UserSchema));
-// };
+export default (conn: mongoose.Connection) => {
+    (userModel = conn.model<IUserModel>('user', UserSchema));
+};
