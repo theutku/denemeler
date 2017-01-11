@@ -19,20 +19,20 @@ class ApiApp {
 
         this.app.set('view engine', 'ejs');
         this.app.set('views', path.join(__dirname, '../views'));
-
-        this.app.use((req, res, next) => {
-            res.status(404).send('404 Not Found');
-        });
-        this.app.use((req, res, next) => {
-            res.status(500).send('500 Internal Server Error');
-        });
     }
 
     private routes(): void {
         this.router = express.Router();
         this.app.use(this.router);
         this.router.get('/test', (req, res, next) => {
-            res.send('App Successful!');
+            res.status(200).send('App Successful!');
+        });
+
+        this.app.use((req, res, next) => {
+            res.status(404).send('404 Not Found');
+        });
+        this.app.use((req, res, next) => {
+            res.status(500).send('500 Internal Server Error');
         });
     }
 
